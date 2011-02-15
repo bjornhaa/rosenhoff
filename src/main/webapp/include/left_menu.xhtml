@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<head>
+    <title>My Facelets Page</title>
+    <meta http-equiv="keywords" content="enter,your,keywords,here"/>
+    <meta http-equiv="description"
+          content="A short description of this page."/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+</head>
+<body>
+<ui:composition>
+    <div id="menu-left">
+        <t:graphicImage value="images/club1.png" rendered="#{menuBean.selectedLag == 'HOCKEY'}" alt="A-lag"/>
+        <t:graphicImage value="images/club2.png" rendered="#{menuBean.selectedLag == 'INLINE'}" alt="Inline"/>
+        <t:graphicImage value="images/club3.png" rendered="#{menuBean.selectedLag == 'OLDBOYS'}" alt="Oldboys"/>
+
+        <ul>
+            <li>
+                <h:commandLink action="#{nyheterBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'NYHETER') ? 'active' : ''}">
+                    <h:outputText value="Nyheter"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{aktivitetBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'AKTIVITET') ? 'active' : ''}">
+                    <h:outputText value="Aktivitet"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{resultatBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'RESULTATER') ? 'active' : ''}">
+                    <h:outputText value="Resultater"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{poengListeBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'POENGLISTA') ? 'active' : ''}">
+                    <h:outputText value="Poenglista"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{reportBean.hentResultater}"
+                               styleClass="#{(menuBean.activePage == 'KAMPRAPPORTER') ? 'active' : ''}">
+                    <h:outputText value="Kamprapporter"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{bildeBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'BILDER') ? 'active' : ''}">
+                    <h:outputText value="Bilder"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{spillerBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'SPILLERE') ? 'active' : ''}">
+                    <h:outputText value="Spillere"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{kontaktBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'KONTAKT') ? 'active' : ''}">
+                    <h:outputText value="Kontakt oss"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{historyBean.hent}" value="Historien"
+                               styleClass="#{(menuBean.activePage == 'HISTORIE') ? 'active' : ''}"/>
+            </li>
+            <!--
+            <li>
+                <h:commandLink action="#{linkBean.hent}"
+                               styleClass="#{(menuBean.activePage == 'LINKER') ? 'active' : ''}">
+                    <h:outputText value="Linker"/>
+                </h:commandLink>
+            </li>
+            -->
+            <li>
+                <h:commandLink id="adminLink" action="login" value="admin"/>
+            </li>
+        </ul>
+    </div>
+</ui:composition>
+</body>
+</html>

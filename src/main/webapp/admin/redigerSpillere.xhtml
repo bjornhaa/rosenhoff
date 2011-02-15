@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+        <span class="graybig">Rediger</span>
+        <span class="greenbig">Spillere</span>
+
+        <p/>
+        Legg inn <t:commandLink value=" ny" action="nySpiller"/>
+
+        <t:dataTable var="spillerGuiWrapper" value="#{adminSpillerBean.spillere}" newspaperColumns="2">
+            <f:facet name="spacer">
+                <f:verbatim> &nbsp; </f:verbatim>
+            </f:facet>
+            <t:column>
+                <div class="players-img">
+                    <p:graphicImage id="spillerBilde" value="#{adminSpillerBean.streamImage}"
+                                    rendered="#{spillerGuiWrapper.spiller.bilde != null}" alt="spillerbilde">
+                        <f:param name="spillerId" value="#{spillerGuiWrapper.spiller.id}"/>
+                    </p:graphicImage>
+                    <t:graphicImage value="../images/old_hockey.jpg"
+                                    rendered="#{spillerGuiWrapper.spiller.bilde == null}" alt="defaultBilde"/>
+                </div>
+            </t:column>
+            <t:column>
+                <div class="players-data">
+                    <dl>
+                        <dt>#{spillerGuiWrapper.spiller.navn}</dt>
+                        <dd><span class="graylight">Posisjon: </span>#{spillerGuiWrapper.posisjon}</dd>
+
+                        <dd><span class="graylight">Mobil: </span>#{spillerGuiWrapper.spiller.mobil}</dd>
+
+                        <dd><span class="graylight">Email: </span> <a
+                                href="mailto:#{spillerGuiWrapper.spiller.email}">#{spillerGuiWrapper.spiller.email}</a>
+                        </dd>
+                    </dl>
+                    <table>
+                        <tr>
+                            <td><h:commandButton value="Slett" action="#{adminSpillerBean.slett}">
+                                <f:setPropertyActionListener target="#{adminSpillerBean.selectedSpiller}"
+                                                             value="#{spillerGuiWrapper.spiller}"/>
+                            </h:commandButton>
+                            </td>
+                            <td><t:commandButton value="Editer" action="#{adminSpillerBean.edit}">
+                                <f:setPropertyActionListener target="#{adminSpillerBean.selectedSpiller}"
+                                                             value="#{spillerGuiWrapper.spiller}"/>
+                            </t:commandButton>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t:column>
+        </t:dataTable>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

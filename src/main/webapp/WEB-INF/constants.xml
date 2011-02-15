@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" default-autowire="byName"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <bean id="sesong2009" class="no.rosenhoff.common.data.Sesong" factory-method="valueOf">
+        <constructor-arg>
+            <value>SESONG_2009</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="lagHockey" class="no.rosenhoff.common.data.Lag" factory-method="valueOf">
+        <constructor-arg>
+            <value>HOCKEY</value>
+        </constructor-arg>
+    </bean>
+    <bean id="lagInline" class="no.rosenhoff.common.data.Lag" factory-method="valueOf">
+        <constructor-arg>
+            <value>INLINE</value>
+        </constructor-arg>
+    </bean>
+    <bean id="lagOldboys" class="no.rosenhoff.common.data.Lag" factory-method="valueOf">
+        <constructor-arg>
+            <value>OLDBOYS</value>
+        </constructor-arg>
+    </bean>
+
+
+</beans>

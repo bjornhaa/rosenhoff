@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+    <ui:define name="body">
+        <t:dataTable var="spillerGui" value="#{adminSpillerKampBean.spillere}">
+            <t:column width="200px">
+                <f:facet name="header">
+                    Hvem spilte kampen ?
+                </f:facet>
+                #{spillerGui.spiller.navn}
+            </t:column>
+            <t:column>
+                <h:selectBooleanCheckbox value="#{spillerGui.selected}"/>
+            </t:column>
+            <f:facet name="footer">
+                <t:commandButton value="Lagre" action="#{adminSpillerKampBean.lagreSpillerKamp}"/>
+            </f:facet>
+        </t:dataTable>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

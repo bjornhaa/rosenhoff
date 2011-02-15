@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="css/libraries.css"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="css/rosenhoff.css"/>
+    <script type="text/javascript" src="js/unitpngfix.js"></script>
+    <title>Rosenhoff</title>
+</head>
+
+<body>
+<div id="maincontainer">
+    <h:form><ui:include src="include/top_menu.xhtml"/></h:form>
+
+    <div id="content-wrapper">
+        <div id="content">
+            <h:form><ui:include src="include/left_menu.xhtml"/></h:form>
+            <h:form id="mainform">
+                <div id="content-right">
+                    <h:messages/>
+                    <ui:insert name="body">Body</ui:insert>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

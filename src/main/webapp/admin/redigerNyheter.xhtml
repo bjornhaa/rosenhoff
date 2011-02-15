@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+
+        <h:panelGroup id="body">
+            <span class="graybig">Rediger</span>
+            <span class="greenbig">Nyheter</span>
+
+            <p/>
+            Legg inn <t:commandLink value=" ny" action="nyNyhet"/>
+
+
+            <t:dataTable var="nyhet" value="#{adminNyheterBean.nyheter}" cellspacing="1" cellpadding="1"
+                         preserveDataModel="true" columnClasses="TableRow" headerClass="TableHeader">
+                <t:column>
+                    <f:facet name="header">
+                        Nyheter
+                    </f:facet>
+
+                    <div class="text-news">
+                        <h3><span class="greenbig">#{nyhet.overskrift}</span><br/>
+                            <span class="date_news">Skrevet </span>
+                            <t:outputText value="#{nyhet.tidlagtinn}" styleClass="date_news">
+                                <f:convertDateTime type="date" pattern="EEEEE dd MMM yyyy" timeZone="#{menuBean.defaultTimeZone}"/>
+                            </t:outputText>
+                        </h3>
+
+                        <p><t:outputText value="#{nyhet.nyhetTxt}" escape="false"/>
+                        </p>
+                    </div>
+                </t:column>
+                <t:column>
+                    <t:commandLink value="slett" action="#{adminNyheterBean.slettNyhet}">
+                        <f:setPropertyActionListener target="#{adminNyheterBean.selectedNyhet}" value="#{nyhet}"/>
+                    </t:commandLink>
+                </t:column>
+
+            </t:dataTable>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

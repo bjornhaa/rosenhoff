@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+<ui:composition template="template.xhtml">
+
+    <ui:define name="body">
+        <div id="content-right">
+            <h2><span class="graybig">Nyheter</span></h2>
+
+            <t:dataTable var="nyhet" value="#{forsideBean.nyheter}">
+
+                <t:column>
+                    <div class="text-news">
+                        <h3><span class="greenbig">#{nyhet.overskrift}</span><br/>
+                            <span class="date_news">Skrevet </span>
+                            <t:outputText value="#{nyhet.tidlagtinn}" styleClass="date_news">
+                                <f:convertDateTime type="date" pattern="EEEEE dd MMM yyyy" timeZone="#{menuBean.defaultTimeZone}"/>
+                            </t:outputText>
+                        </h3>
+
+                        <p><t:outputText value="#{nyhet.nyhetTxt}" escape="false"/>
+                        </p>
+                    </div>
+                </t:column>
+            </t:dataTable>
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+</body>
+</html>         	 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.prime.com.tr/ui" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template_no_form.xhtml">
+
+    <ui:define name="body">
+        <h:form id="spillerForm" enctype="multipart/form-data" prependId="false">
+            <table>
+                <tr>
+                    <td>Navn</td>
+                    <td><t:inputText value="#{adminSpillerBean.nySpiller.navn}" required="true"/></td>
+                </tr>
+                <tr>
+                    <td>Posisjon</td>
+                    <td>
+                        <t:selectOneListbox value="#{adminSpillerBean.nySpiller.posisjon}">
+                            <t:selectItems value="#{posisjonList}" var="posisjon" itemLabel="#{posisjon}"
+                                           itemValue="#{posisjon.kode}"/>
+                        </t:selectOneListbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mobil</td>
+                    <td><t:inputText value="#{adminSpillerBean.nySpiller.mobil}" maxlength="12"/></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><t:inputText value="#{adminSpillerBean.nySpiller.email}"/></td>
+                </tr>
+                <tr>
+                    <td>SpillerBilde</td>
+                    <td>
+                        <p:fileUpload
+                                fileUploadListener="#{adminSpillerBean.handleFileUpload}"   
+                                allowTypes="*.jpg;*.png;*.gif;"
+                                description="Images"
+                                id="uploadControl"
+                                sizeLimit="#{adminSpillerBean.fileSizeLimit}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:graphicImage id="spillerBilde" value="#{adminSpillerBean.streamImage}"
+                                        rendered="#{adminSpillerBean.nySpiller.bilde != null}" alt="spillerbilde">
+                            <f:param name="spillerId" value="#{adminSpillerBean.nySpiller.id}"/>
+                        </p:graphicImage>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h:commandButton action="#{adminSpillerBean.lagreSpiller}" value="lagre"/></td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

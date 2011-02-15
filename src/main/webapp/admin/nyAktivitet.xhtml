@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:ft="http://facestrace.sourceforge.net"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://facestrace.sourceforge.net ">
+<body>
+<ui:composition template="admin_template_no_form.xhtml">
+
+    <ui:define name="body">
+        <p:resources/>
+        <h:form id="nyAktivitetForm">
+            <table class="inputTable" width="300px">
+                <tr>
+                    <td>Dato</td>
+                    <td colspan="2">
+                        <rich:calendar value="#{adminAktivitetBean.selectedAktivitet.aktivitet.naar}"
+                        locale="no_NO"
+                        popup="true"
+                        datePattern="dd.MM.yyyy"
+                        showApplyButton="false"
+                        cellWidth="24px"
+                        cellHeight="22px"
+                        enableManualInput="false"
+                        firstWeekDay="1"
+                        style="width:200px"/>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tidspunkt</td>
+                    <td colspan="2">
+                        <t:selectOneMenu id="startTid" value="#{adminAktivitetBean.selectedAktivitet.nyStartTid}">
+                            <f:selectItems value="#{adminAktivitetBean.tidsliste}"/>
+                        </t:selectOneMenu>
+                        -
+                        <t:selectOneMenu id="sluttTid" value="#{adminAktivitetBean.selectedAktivitet.nySluttTid}">
+                            <f:selectItems value="#{adminAktivitetBean.tidsliste}"/>
+                        </t:selectOneMenu>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hva</td>
+                    <td colspan="2">
+                        <t:inputText value="#{adminAktivitetBean.selectedAktivitet.aktivitet.hva}" id="hva"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hvor</td>
+                    <td>
+                        <t:selectOneMenu id="hvor" escape="true" validator="myValidator"
+                                         value="#{adminAktivitetBean.selectedAktivitet.hvor}">
+                            <f:selectItems value="#{adminAktivitetBean.aktivitetSteder}"/>
+                        </t:selectOneMenu>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <t:commandButton value="Lagre" action="#{adminAktivitetBean.lagreAktivitet}"/>
+                    </td>
+                    <td>
+                        <t:commandButton value="Avbryt" action="#{adminAktivitetBean.cancel}" immediate="true"/>
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+
+            </table>
+        </h:form>
+
+        <h:form id="nystedForm">
+            <h:outputLink value="javascript:void(0)" onclick="dlg.show()">Legg inn nytt sted</h:outputLink>
+            <p:dialog header="lagre nytt sted" width="300" widgetVar="dlg" visible="false" modal="true"
+                      id="stedDlg">
+                <table style="margin-bottom:10px">
+                    <tr>
+                        <td><h:outputLabel for="aktivitetSted" value="Sted:"/></td>
+                        <td><h:inputText id="aktivitetSted" value="#{adminAktivitetBean.nySted}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:commandButton value="Lagre" update="nyAktivitetForm:hvor"
+                                             oncomplete="dlg.hide();"/>
+                        </td>
+                    </tr>
+                </table>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

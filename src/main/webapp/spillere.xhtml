@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+<ui:composition template="template.xhtml">
+
+    <ui:define name="body">
+        <div id="content-right">
+            <t:dataTable var="spillerGuiWrapper" value="#{spillerBean.spillere}" newspaperColumns="2">
+                <f:facet name="spacer">
+                    <f:verbatim> &nbsp; </f:verbatim>
+                </f:facet>
+                <t:column>
+                    <div class="players-img">
+                        <p:graphicImage id="spillerBilde" value="#{spillerBean.streamImage}"
+                                        rendered="#{spillerGuiWrapper.spiller.bilde != null}" alt="spillerbilde">
+                            <f:param name="spillerId" value="#{spillerGuiWrapper.spiller.id}"/>
+                        </p:graphicImage>
+                        <t:graphicImage value="../images/old_hockey.jpg"
+                                        rendered="#{spillerGuiWrapper.spiller.bilde == null}" alt="defaultBilde"/>
+                    </div>
+                </t:column>
+                <t:column>
+                    <div class="players-data">
+                        <dl>
+                            <dt>#{spillerGuiWrapper.spiller.navn}</dt>
+                            <dd><span class="graylight">Posisjon: </span>#{spillerGuiWrapper.posisjon}</dd>
+
+                            <dd><span class="graylight">Mobil: </span>#{spillerGuiWrapper.spiller.mobil}</dd>
+
+                            <dd><span class="graylight">Email: </span> <a
+                                    href="mailto:#{spillerGuiWrapper.spiller.email}">#{spillerGuiWrapper.spiller.email}</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </t:column>
+            </t:dataTable>
+
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+</body>
+</html>

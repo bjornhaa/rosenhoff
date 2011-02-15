@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+        <h2><span class="graybig">aktiviteter</span> <span class="greenbig">fremover</span></h2>
+        Legg inn <t:commandLink value=" ny" action="nyAktivitet"/>
+        <t:dataTable var="aktivitetGuiWrapper" value="#{adminAktivitetBean.aktiviteter}" rowClasses="rowblue,">
+            <p:column width="80">
+                <f:facet name="header">Dato</f:facet>
+                <t:outputText value="#{aktivitetGuiWrapper.aktivitet.naar}">
+                    <f:convertDateTime pattern="EE dd.MM.yy" type="date" locale="no_no" timeZone="#{menuBean.defaultTimeZone}"/>
+                </t:outputText>
+            </p:column>
+            <p:column width="90">
+                <f:facet name="header">Tidspunkt</f:facet>
+                <t:outputText value="#{aktivitetGuiWrapper.aktivitet.naar}">
+                    <f:convertDateTime pattern="HH.mm" timeZone="#{menuBean.defaultTimeZone}"/>
+                </t:outputText>
+                <t:outputText value=" - "/>
+                <t:outputText value="#{aktivitetGuiWrapper.aktivitet.ferdig}">
+                    <f:convertDateTime pattern="HH.mm" timeZone="#{menuBean.defaultTimeZone}"/>
+                </t:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">Hva</f:facet>
+                #{aktivitetGuiWrapper.aktivitet.hva}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Hvor</f:facet>
+                #{aktivitetGuiWrapper.aktivitet.aktivitetSted.stedsnavn}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Editer</f:facet>
+                <t:commandButton value="Editer" action="nyAktivitet">
+                    <f:setPropertyActionListener target="#{adminAktivitetBean.selectedAktivitet}"
+                                                 value="#{aktivitetGuiWrapper}"/>
+                </t:commandButton>
+            </p:column>
+            <p:column>
+                <f:facet name="header">Slett</f:facet>
+                <t:commandButton value="Slett" action="#{adminAktivitetBean.slettAktivitet}">
+                    <f:setPropertyActionListener target="#{adminAktivitetBean.selectedAktivitet}"
+                                                 value="#{aktivitetGuiWrapper}"/>
+                </t:commandButton>
+            </p:column>
+
+        </t:dataTable>
+    </ui:define>
+</ui:composition>
+
+</body>
+</html>

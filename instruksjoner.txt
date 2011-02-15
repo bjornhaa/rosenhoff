@@ -1,0 +1,12 @@
+Database:
+Startes i server mode
+--> Applications/h2/bin/h2.s
+
+Applikasjon:
+/Users/bjornhaa/develop/rosenhoff
+mvn jetty:run
+
+databaseadmin:
+Squirrel installert her: 
+/Users/bjornhaa/Downloads/squirrel-sql-3.0.2-standard/SQuirreL SQL Client
+start med java -jar squir.....jar (husk java 6)

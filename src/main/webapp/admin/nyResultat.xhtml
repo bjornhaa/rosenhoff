@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+
+
+        <table border="0">
+            <tr>
+                <th><t:outputText value="Dato"/></th>
+                <th><t:outputText value="H/B?"/></th>
+                <th><t:outputText value=""/></th>
+                <th><t:outputText value="Motstander"/></th>
+                <th><t:outputText value="Resultat"/></th>
+            </tr>
+            <tr>
+                <td>
+                    <rich:calendar value="#{adminResultatBean.selectedDato}"
+                    locale="no_NO"
+                    popup="true"
+                    datePattern="dd.MM.yyyy"
+                    showApplyButton="false"
+                    cellWidth="24px"
+                    cellHeight="22px"
+                    enableManualInput="false"
+                    firstWeekDay="1"
+                    style="width:200px"/>
+                </td>
+                <td>
+                    <t:selectOneMenu value="#{adminResultatBean.hb}">
+                        <f:selectItem itemValue="Hjemme"/>
+                        <f:selectItem itemValue="Borte"/>
+                    </t:selectOneMenu>
+                </td>
+                <td>#{adminResultatBean.KONST_HJEMMELAG}</td>
+                <td><t:inputText id="motstander" value="#{adminResultatBean.motstander}" required="true"/></td>
+                <td><t:inputText id="maal_hjemme" maxlength="2" size="2" value="#{adminResultatBean.maal}"/>
+                    -
+                    <t:inputText id="maal_borte" maxlength="2" size="2" value="#{adminResultatBean.maalBortelag}"/></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <t:commandButton value="avbryt" action="redigerResultat" immediate="true"/>
+                    <t:commandButton value="lagre" action="#{adminResultatBean.nyResultat}"/>
+                </td>
+            </tr>
+        </table>
+
+
+    </ui:define>
+</ui:composition>
+</body>
+</html>

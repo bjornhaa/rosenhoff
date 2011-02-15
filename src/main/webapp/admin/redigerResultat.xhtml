@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+        <span class="graybig">Rediger</span>
+        <span class="greenbig">Resultater</span>
+
+        <p/>
+        Legg inn <t:commandLink value=" ny" action="nyResultat"/>
+
+
+        <t:dataTable var="resultatView" value="#{adminResultatBean.resultater}"
+                     cellpadding="1"
+                     cellspacing="1"
+                     width="75%"
+                     renderedIfEmpty="false"
+                     headerClass="TableHeader"
+                     columnClasses="TableRow">
+            <t:column>
+                <f:facet name="header">
+                    <t:outputText value="Dato"/>
+                </f:facet>
+                <t:outputText value="#{resultatView.kamp.dato}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" type="date" locale="no_no" timeZone="#{menuBean.defaultTimeZone}"/>
+                </t:outputText>
+            </t:column>
+
+            <t:column>
+                <f:facet name="header">
+                    <t:outputText value="Hjemme"/>
+                </f:facet>
+                <t:outputText value="#{(resultatView.kamp.hjemme == 'Borte') ? resultatView.kamp.motstander : 'Rosenhoff'}"/>
+            </t:column>
+
+            <t:column>
+                <f:facet name="header">
+                    <t:outputText value="Borte"/>
+                </f:facet>
+                <t:outputText value="#{(resultatView.kamp.hjemme == 'Borte') ? 'Rosenhoff' : resultatView.kamp.motstander}"/>
+            </t:column>
+
+            <t:column>
+                <f:facet name="header">
+                    <t:outputText value="Resultat"/>
+                </f:facet>
+                <t:outputText value="#{(resultatView.kamp.hjemme == 'Borte') ? resultatView.kamp.maalSluppetInn : resultatView.kamp.maalScoret}"/>
+                <t:outputText value=" - "/>
+                <t:outputText value="#{(resultatView.kamp.hjemme == 'Borte') ? resultatView.kamp.maalScoret : resultatView.kamp.maalSluppetInn}"/>
+            </t:column>
+
+            <t:column>
+                <f:facet name="header">
+                    <h:outputText value="slett"/>
+                </f:facet>
+                <t:commandLink value="slett" action="#{adminResultatBean.slettResultat}">
+                    <f:setPropertyActionListener target="#{adminResultatBean.selectedKamp}" value="#{resultatView.kamp}"/>
+                </t:commandLink>
+            </t:column>
+
+            <t:column>
+                <f:facet name="header">
+                    <h:outputText value="Kamprapport"/>
+                </f:facet>
+                <t:commandLink value="Lag rapport" action="adminKampRaport" rendered="#{empty resultatView.rapport}">
+                    <f:setPropertyActionListener target="#{adminReportBean.selectedKamp}" value="#{resultatView.kamp}"/>
+                </t:commandLink>
+                <t:commandLink value="Rediger rapport" action="adminKampRaport" rendered="#{not empty resultatView.rapport}">
+                    <f:setPropertyActionListener target="#{adminReportBean.selectedKamp}" value="#{resultatView.kamp}"/>
+                    <f:setPropertyActionListener target="#{adminReportBean.selectedRapport}" value="#{resultatView.rapport}"/>
+                </t:commandLink>
+            </t:column>
+        </t:dataTable>
+
+    </ui:define>
+</ui:composition>
+</body>
+</html>

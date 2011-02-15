@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" default-autowire="byName"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          init-method="createDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.p6spy.engine.spy.P6SpyDriver"></property>
+        <property name="url"
+                  value="jdbc:h2:tcp://localhost/~/h2database/rosenhoff"></property>
+        <property name="username" value="sa"></property>
+        <property name="password" value=""></property>
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"></ref>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>no.rosenhoff.common.db.Nyhet</value>
+                <value>no.rosenhoff.common.db.Kamp</value>
+                <value>no.rosenhoff.common.db.Spiller</value>
+                <value>no.rosenhoff.common.db.Poeng</value>
+                <value>no.rosenhoff.common.db.Aktivitet</value>
+                <value>no.rosenhoff.common.db.KampSpiller</value>
+                <value>no.rosenhoff.common.db.Bruker</value>
+                <value>no.rosenhoff.common.db.AktivitetSted</value>
+                <value>no.rosenhoff.common.db.Rapport</value></list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.HSQLDialect
+                </prop>
+                <!--
+                        <prop key="hibernate.show_sql">true</prop> <prop
+                        key="hibernate.format_sql">true</prop>” <prop
+                        key="hibernate.use_sql_comments">true</prop>
+                    -->
+            </props>
+        </property>
+    </bean>
+
+    <bean name="toppScorerDato" class="no.rosenhoff.common.db.ToppScorerDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="menuBean" class="no.rosenhoff.servlet.MenuBean" scope="session"/>
+
+    <bean id="managedBeans" class="no.rosenhoff.servlet.ManagedBeans" abstract="true">
+        <property name="aktivitetDAO" ref="aktivitetDAO"/>
+        <property name="brukerDAO" ref="brukerDao"/>
+        <property name="kampDAO" ref="kampDAO"/>
+        <property name="kampSpillerDAO" ref="kampSpillerDAO"/>
+        <property name="nyhetDAO" ref="nyhetDAO"/>
+        <property name="spillerDAO" ref="spillerDAO"/>
+        <property name="menuBean" ref="menuBean"/>
+        <property name="aktivitetStedDAO" ref="aktivitetStedDAO"/>
+        <property name="rapportDAO" ref="rapportDAO"/>
+    </bean>
+
+    <bean id="adminNyheterBean" class="no.rosenhoff.servlet.AdminNyheterBean" parent="managedBeans" scope="session">
+    </bean>
+
+    <bean id="loginBean" class="no.rosenhoff.servlet.LoginBean" parent="managedBeans" scope="session"/>
+
+    <bean id="forsideBean" class="no.rosenhoff.servlet.ForsideBean" parent="managedBeans" scope="session">
+    </bean>
+
+
+    <bean id="adminResultatBean" class="no.rosenhoff.servlet.AdminResultatBean" parent="managedBeans" scope="session">
+        <property name="adminSpillerKampBean" ref="adminSpillerKampBean"/>
+    </bean>
+
+    <bean id="adminSpillerBean" class="no.rosenhoff.servlet.AdminSpillerBean" parent="managedBeans" scope="session">
+    </bean>
+
+
+    <bean id="adminSpillerKampBean" class="no.rosenhoff.servlet.AdminSpillerKampBean" parent="managedBeans"
+          scope="session">
+    </bean>
+
+    <bean id="spillerBean" class="no.rosenhoff.servlet.SpillerBean" parent="managedBeans" scope="session"/>
+
+    <bean id="posisjonList" class="no.rosenhoff.common.data.Posisjon" factory-method="getAllAsList"/>
+
+    <bean id="adminAktivitetBean" class="no.rosenhoff.servlet.AdminAktivitetBean" parent="managedBeans"
+          scope="session"/>
+
+    <bean id="poengListeBean" class="no.rosenhoff.servlet.PoengListeBean" parent="managedBeans" scope="session">
+        <property name="toppScorerDao" ref="toppScorerDato"/>
+     </bean>
+
+    <bean id="nyheterBean" class="no.rosenhoff.servlet.NyheterBean" parent="managedBeans" scope="session"/>
+
+    <bean id="aktivitetBean" class="no.rosenhoff.servlet.AktivitetBean" parent="managedBeans" scope="session"/>
+
+    <bean id="resultatBean" class="no.rosenhoff.servlet.ResultatBean" parent="managedBeans" scope="session"/>
+
+    <bean id="bildeBean" class="no.rosenhoff.servlet.BildeBean" parent="managedBeans" scope="session"/>
+
+    <bean id="kontaktBean" class="no.rosenhoff.servlet.KonktaktBean" parent="managedBeans" scope="session"/>
+
+    <bean id="historyBean" class="no.rosenhoff.servlet.HistoryBean" parent="managedBeans" scope="session"/>
+
+    <bean id="linkBean" class="no.rosenhoff.servlet.LinkBeanBean" parent="managedBeans" scope="session"/>
+
+    <bean id="adminReportBean" class="no.rosenhoff.servlet.AdminReportBean" parent="managedBeans" scope="session"/>
+
+    <bean id="reportBean" class="no.rosenhoff.servlet.ReportBean" parent="managedBeans" scope="session"/>
+
+    <bean id="nyhetDAO" class="no.rosenhoff.common.db.NyhetDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="kampDAO" class="no.rosenhoff.common.db.KampDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="spillerDAO" class="no.rosenhoff.common.db.SpillerDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="poengDAO" class="no.rosenhoff.common.db.PoengDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="aktivitetDAO" class="no.rosenhoff.common.db.AktivitetDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="kampSpillerDAO" class="no.rosenhoff.common.db.KampSpillerDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="brukerDao" class="no.rosenhoff.common.db.BrukerDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="aktivitetStedDAO"
+          class="no.rosenhoff.common.db.AktivitetStedDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="rapportDAO" class="no.rosenhoff.common.db.RapportDAO">
+    	<property name="sessionFactory">
+    		<ref bean="sessionFactory" />
+    	</property>
+    </bean>
+    <bean id="RapportDAO" class="no.rosenhoff.common.db.RapportDAO">
+    	<property name="sessionFactory">
+    		<ref bean="sessionFactory" />
+    	</property>
+    </bean></beans>

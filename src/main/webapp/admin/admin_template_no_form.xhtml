@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/libraries.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/rosenhoff.css"/>
+    <script type="text/javascript" src="../js/unitpngfix.js"></script>
+    <title>Admin</title>
+    <p:resources />
+</head>
+
+<body>
+<div id="maincontainer">
+    <h:form><ui:include src="../include/admin_top_menu.xhtml"/></h:form>
+
+    <div id="content-wrapper">
+        <div id="content">
+            <h:form><ui:include src="../include/admin_menu.xhtml"/></h:form>
+
+            <div id="content-right">
+                <h:messages/>
+                <ui:insert name="body">Body</ui:insert>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

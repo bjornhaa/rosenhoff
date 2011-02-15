@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+<ui:composition template="template.xhtml">
+
+    <ui:define name="body">
+        <div id="content-right">
+
+            <h2><span class="graybig">Poenglista</span></h2>
+
+            <t:dataTable var="element" value="#{poengListeBean.toppScorereListe}" rowIndexVar="rowId">
+
+
+                <t:column>
+                    <f:facet name="header"></f:facet>
+                    #{rowId+1}
+                </t:column>
+
+                <t:column>
+                    <f:facet name="header">Navn</f:facet>
+                    #{element.spiller.navn}
+                </t:column>
+
+                <t:column>
+                    <f:facet name="header">Kamper</f:facet>
+                    #{element.kamper}
+                </t:column>
+
+                <t:column>
+                    <f:facet name="header">Mål</f:facet>
+                    #{element.maal}
+                </t:column>
+
+                <t:column>
+                    <f:facet name="header">Pass</f:facet>
+                    #{element.pass}
+                </t:column>
+
+
+                <t:column id="total">
+                    <f:facet name="header">Total</f:facet>
+                    #{element.total}
+                </t:column>
+
+                <t:column>
+                    <f:facet name="header">Poeng/kamp</f:facet>
+                    <t:outputText value="#{element.poengPrKamp}">
+                        <f:convertNumber maxFractionDigits="1"/>
+                    </t:outputText>
+                </t:column>
+            </t:dataTable>
+
+        </div>
+    </ui:define>
+</ui:composition>
+</body>
+</html>         	 

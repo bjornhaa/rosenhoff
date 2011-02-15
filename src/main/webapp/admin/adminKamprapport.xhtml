@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+
+        <h2><t:outputText value=" #{(adminReportBean.selectedKamp.hjemme == 'Borte') ? adminReportBean.selectedKamp.motstander : 'Rosenhoff'}"/> - <t:outputText value=" #{(adminReportBean.selectedKamp.hjemme == 'Borte') ? 'Rosenhoff ' : adminReportBean.selectedKamp.motstander} "/>
+        <t:outputText value="#{adminReportBean.selectedKamp.dato}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" type="date" locale="No_no" timeZone="#{menuBean.defaultTimeZone}"/>
+        </t:outputText>
+        <t:outputText value=": "/>
+        <t:outputText value="#{(adminReportBean.selectedKamp.hjemme == 'Borte') ? adminReportBean.selectedKamp.maalSluppetInn : adminReportBean.selectedKamp.maalScoret}"/>
+        <t:outputText value=" - "/>
+        <t:outputText value="#{(adminReportBean.selectedKamp.hjemme == 'Borte') ? adminReportBean.selectedKamp.maalScoret : adminReportBean.selectedKamp.maalSluppetInn}"/>
+
+        </h2>
+
+        <table>
+            <tr>
+                <td>Tittel</td>
+                <td><t:inputText value="#{adminReportBean.selectedTitle}"/> </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><t:inputTextarea value="#{adminReportBean.selectedText}"/> </td>
+            </tr>
+            <tr>
+                <td><t:commandButton value="Avbryt" action="#{adminResultatBean.redigerResultater}"/></td>
+                <td><t:commandButton value="Lagre" action="#{adminReportBean.lagre}"/> </td>
+            </tr>
+        </table>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

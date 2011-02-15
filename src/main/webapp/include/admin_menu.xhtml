@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<head>
+    <title>My Facelets Page</title>
+    <meta http-equiv="keywords" content="enter,your,keywords,here"/>
+    <meta http-equiv="description"
+          content="A short description of this page."/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+</head>
+<body>
+<ui:composition>
+    <div id="menu-left">
+        <t:graphicImage value="../images/club1.png" rendered="#{menuBean.selectedLag == 'HOCKEY'}" alt="A-lag"/>
+        <t:graphicImage value="../images/club2.png" rendered="#{menuBean.selectedLag == 'INLINE'}" alt="Inline"/>
+        <t:graphicImage value="../images/club3.png" rendered="#{menuBean.selectedLag == 'OLDBOYS'}" alt="Oldboys"/>
+        <ul>
+            <li>
+                <h:commandLink action="#{adminAktivitetBean.redigerAktiviteter}"
+                               styleClass="#{(menuBean.activePage == 'REDIGER_AKTIVITET') ? 'active' : ''}">
+                    <h:outputText value="Endre aktiviteter"/>
+                </h:commandLink>
+            </li>
+            <li><h:commandLink action="#{adminResultatBean.redigerResultater}"
+                               styleClass="#{(menuBean.activePage == 'REDIGER_RESULTAT') ? 'active' : ''}">
+                <h:outputText value="Endre resultater"/>
+            </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{adminNyheterBean.redigerNyheter}"
+                               styleClass="#{(menuBean.activePage == 'REDIGER_NYHET') ? 'active' : ''}">
+                    <h:outputText value="Endre nyheter"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{adminSpillerBean.redigerSpillere}"
+                               styleClass="#{(menuBean.activePage == 'REDIGER_SPILLERE') ? 'active' : ''}">
+                    <h:outputText value="Endre spillere"/>
+                </h:commandLink>
+            </li>
+            <li>
+                <h:commandLink action="#{adminNyheterBean.redigerNyheter}"
+                               styleClass="#{(menuBean.activePage == 'REDIGER_BILDER') ? 'active' : ''}">
+                    <h:outputText value="Endre bilder"/>
+                </h:commandLink>
+            </li>
+        </ul>
+    </div>
+
+</ui:composition>
+</body>
+</html>

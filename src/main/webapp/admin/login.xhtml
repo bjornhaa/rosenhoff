@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+
+
+        <h:panelGrid columns="2" rendered="#{!loginBean.innlogget}">
+            <h:outputLabel value="Brukernavn" for="brukernavn"/>
+            <t:inputText id="brukernavn" value="#{loginBean.username}"/>
+
+            <h:outputLabel value="Passord" for="passord"/>
+            <t:inputSecret id="passord" value="#{loginBean.password}"/>
+
+            <f:verbatim>&nbsp;</f:verbatim>
+            <t:commandButton value="Logg inn" action="#{loginBean.login}"/>
+
+        </h:panelGrid>
+
+        <t:outputText value="Du er logget inn" rendered="#{loginBean.innlogget}"/>
+
+        <f:verbatim>
+            <script>
+                document.forms['mainform'].elements[0].focus();
+            </script>
+        </f:verbatim>
+    </ui:define>
+</ui:composition>
+</body>
+</html>  

@@ -1,0 +1,510 @@
+/********************Page Structure****************/
+#maincontainer {
+    margin: 0px auto;
+    padding: 0px;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    height: auto;
+}
+
+#header-wrapper {
+    margin: 0px auto;
+    padding: 0px;
+    width: 960px;
+    height: auto;
+    position: relative;
+}
+
+/*only for index page*/
+body#index {
+    background-image: none;
+}
+
+body#index #header-wrapper {
+    padding-top: 40px;
+}
+
+#header {
+    width: 960px;
+    margin: 0 auto;
+    height: 42px;
+    margin-bottom: 47px;
+    clear: both;
+    position: relative;
+}
+
+#banner {
+    width: 940px;
+    margin: 0 auto;
+    border: 10px solid #ffffff;
+    clear: both;
+    margin-bottom: 25px;
+    background-image: url(../images/rosenhoff_hockey-club_banner.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#content-wrapper {
+    clear: both;
+    width: 100%;
+    overflow: hidden;
+}
+
+#content {
+    width: 960px;
+    clear: both;
+    margin: 0px auto 30px;
+    padding: 0px;
+    overflow: hidden;
+    position: relative;
+}
+
+.blue-bg {
+    background: url(../images/content_bg.jpg) repeat-x;
+}
+
+#footer-wrapper {
+    clear: both;
+    width: 100%;
+    background-color: #D3DDDC;
+    height: auto;
+    overflow: hidden;
+    background: url(../images/footer_bg.png) top repeat-x;
+    padding-top: 50px;
+}
+
+#footer {
+    width: 960px;
+    margin: 0px auto;
+    padding: 0px;
+    clear: both;
+    position: relative;
+    margin-bottom: 40px;
+    height: 50px;
+}
+
+/*****************Header********************/
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background: url(../images/rosenhoff_hockey-club_logo.png) no-repeat;
+}
+
+#menu {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    width: 145px;
+    height: 30px;
+}
+
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#menu ul li {
+    float: left;
+    display: block;
+    height: 27px;
+    margin-right: 5px;
+}
+
+#menu ul li a {
+    display: block;
+    font-size: 11px;
+    width: 65px;
+    height: 27px;
+    color: #8B8B8B;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Lucida Grande, Arial, Helvetica, Sans-Serif;
+    line-height: 27px;
+    text-align: center;
+}
+
+#menu ul li a.active, #menu ul li a.active:hover {
+    color: #ffffff;
+    font-weight: bold;
+    background: url(../images/mainmenu_bg.gif) no-repeat;
+}
+
+#menu ul li a:hover {
+    color: #57a0a6;
+}
+
+/****************Banner****************/
+#banner-content {
+    position: absolute;
+    top: 35px;
+    left: 480px;
+    width: 406px;
+    margin-bottom: 35px;
+}
+
+#banner-content h2 {
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: -1px;
+}
+
+#banner-content a.readmore {
+    float: right;
+    display: block;
+}
+
+/****************Content****************/
+#right-sidecolumn {
+    float: left;
+    width: 630px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+#left-sidecolumn {
+    float: left;
+    width: 310px;
+    _width: 300px;
+    padding-top: 10px;
+}
+
+#left-sidecolumn blockquote {
+    margin-top: 40px;
+    font-size: 20px;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    background: url(../images/quote_bg.png) no-repeat;
+    padding: 20px;
+}
+
+#left-sidecolumn blockquote p {
+    margin-bottom: 10px;
+}
+
+.blue {
+    color: #57A0A6;
+}
+
+.yellow {
+    color: #DBCD0C;
+}
+
+.quote-author {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 11px;
+    color: #878787;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.graybig {
+    color: #605F5F;
+    font-weight: bold;
+}
+
+.yellowlight {
+    color: #DBCD0C;
+}
+
+.graylight {
+    color: #605F5F;
+}
+
+ul#teams {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul#teams li {
+    float: left;
+    width: 196px;
+    margin-right: 20px;
+}
+
+ul#teams li a.team1, #teams li a.team2, #teams li a.team3 {
+    background-position: 0px -204px;
+    background-repeat: no-repeat;
+    padding: 0;
+    display: block;
+    height: 204px;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+
+ul#teams li a.team1 {
+    background-image: url('../images/team1.jpg');
+}
+
+ul#teams li a.team2 {
+    background-image: url('../images/team2.jpg');
+}
+
+ul#teams li a.team3 {
+    background-image: url('../images/team3.jpg');
+}
+
+#teams li a:hover.team1, #teams li a:hover.team2, #teams li a:hover.team3 {
+    background-position: 0px 0px;
+}
+
+ul#teams li a.view-profile {
+    background: url(../images/view.jpg) no-repeat bottom center;
+    display: block;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: 121px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    color: #ffffff;
+    margin: 0 auto;
+}
+
+/****************Footer****************/
+p.copyright {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+#menufooter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 145px;
+    height: 30px;
+}
+
+#menufooter ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 30px;
+    padding: 15px 5px 0 0;
+    overflow: hidden;
+}
+
+#menufooter ul li {
+    float: left;
+    display: block;
+    height: 30px;
+}
+
+#menufooter ul li a {
+    display: block;
+    width: 50px;
+    color: #8B8B8B;
+    font-weight: bold;
+    font-family: Lucida Grande, Arial, Helvetica, Sans-Serif;
+    _letter-spacing: -1px;
+}
+
+#menufooter ul li a.active {
+    color: #60A9AF;
+    font-weight: bold;
+}
+
+#menufooter ul li a:hover, #menufooter ul li a.active:hover {
+    color: #60A9AF;
+}
+
+/****************News****************/
+#menu-left {
+    float: left;
+    width: 195px;
+    padding-right: 20px;
+    background: url(../images/canvas_shadow.jpg) no-repeat top right;
+    min-height: 571px;
+    height: 571px;
+}
+
+#content-right {
+    float: left;
+    width: 705px;
+    background-color: #FFFFFF;
+    min-height: 610px;
+    _height: 610px;
+    padding: 20px;
+}
+
+.greenbig {
+    color: #57A0A6;
+    font-weight: bold;
+}
+
+.greenlight {
+    color: #57A0A6;
+}
+
+.text-news {
+    border-bottom: 2px solid #E9E9E9;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.date_news {
+    font-size: .74em;
+    margin-bottom: 1.73em;
+    line-height: 1.38em;
+    color: #5D6C6C;
+}
+
+/****************Menu LEFT****************/
+#menu-left ul {
+    list-style: none;
+    margin: 0 -20px 0 0;
+    padding: 0;
+    width: 215px;
+}
+
+#menu-left ul li {
+    height: 50px;
+}
+
+#menu-left ul li a {
+    display: block;
+    height: 50px;
+    padding-left: 20px;
+    line-height: 50px;
+}
+
+#menu-left ul li a.active {
+    background: url(../images/leftmenu_bg.png) no-repeat top right;
+}
+
+#menu-left ul li a:hover, #menu-left ul li a.active {
+    color: #60A9AF;
+}
+
+/****************Activity****************/
+#activity {
+    width: 705px;
+}
+
+.rowblue {
+    background-color: #EEF1F6;
+}
+
+#activity th {
+    text-align: center;
+}
+
+#activity td, th {
+    border: 2px solid #ffffff;
+}
+
+/****************Players****************/
+#players {
+    overflow: hidden;
+}
+
+#players ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#players ul li {
+    display: block;
+    width: 342px;
+    float: left;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #E9E9E9;
+}
+
+#players ul li a:hover {
+    color: #5D6C6C;
+    text-decoration: none;
+}
+
+.players-img {
+    float: left;
+    margin-right: 5px;
+    background: url(../images/photo_frame.png) no-repeat;
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.players-img img {
+    width: 110px;
+}
+
+.players-data {
+    float: left;
+    width: 217px;
+    line-height: 22px;
+    color: #57A0A6;
+}
+
+.players-data dl {
+    margin-left: 10px;
+}
+
+.players-data dd {
+    margin: 0px;
+}
+
+/****************Contact****************/
+#contact {
+    overflow: hidden;
+}
+
+#contact ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#contact ul li {
+    display: block;
+    width: 312px;
+    height: 110px;
+    float: left;
+    background: url(../images/contact_box.png) no-repeat;
+    padding: 20px 10px 10px 20px;
+    margin-bottom: 15px;
+    color: #57A0A6;
+    overflow: hidden;
+}
+
+#contact ul li h3, #contact h3 {
+    color: #605F5F;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.space-column {
+    margin-right: 15px;
+}
+
+/****************General ****************/
+#players-left {
+    width: 347px;
+    float: left;
+    margin: 15px 10px 0 0;
+}
+
+#players-right {
+    width: 347px;
+    float: left;
+    margin-top: 15px;
+}
+
+.noborder {
+    border: 0 !important;
+}
