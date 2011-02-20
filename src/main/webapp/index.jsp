@@ -119,9 +119,8 @@
         BrowserDetect.init();
 
     </script>
-
+    <meta http-equiv="refresh" content="0; URL=startpage.jsf">
 </head>
 <body>
-<jsp:forward page="startpage.jsf"/>
 </body>
 </html>

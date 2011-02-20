@@ -2,9 +2,6 @@ package no.rosenhoff.servlet;
 
 import no.rosenhoff.common.data.SpillerGuiWrapper;
 import no.rosenhoff.common.db.Spiller;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-
 import javax.faces.context.FacesContext;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -29,6 +26,7 @@ public class SpillerBean extends ManagedBeans {
         return spillere;
     }
 
+    /*
     public StreamedContent getStreamImage() throws SQLException {
         Map<String, String> requestParamMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String spillerId = requestParamMap.get("spillerId");
@@ -41,7 +39,7 @@ public class SpillerBean extends ManagedBeans {
             return new DefaultStreamedContent(stream);
         }
     }
-    
+    */
 
     public String hent() {
         getMenuBean().setActivePage(ActivePageEnum.SPILLERE);
