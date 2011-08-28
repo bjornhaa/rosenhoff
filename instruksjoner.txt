@@ -12,3 +12,11 @@ Squirrel installert her:
 start med java -jar squir.....jar (husk java 6)
 
 git repo: git@github.com:bjornhaa/rosenhoff.git
+
+
+For Œ deploye:
+bruk forklift for Œ kopiere over til tmp
+(ftp til 216.18.197.178, bruker ril passord klikk11 (tror jeg))
+
+ssh root@50.56.73.163
+passord rosenhoffq2acOH63W

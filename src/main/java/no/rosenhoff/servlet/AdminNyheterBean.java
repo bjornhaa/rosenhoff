@@ -71,11 +71,6 @@ public class AdminNyheterBean extends ManagedBeans {
         Nyhet nyhet = new Nyhet();
         nyhet.setAktiv(true);
         nyhet.setNyhetTxt(getInputTekst());
-        if (getInputTekst().length() > 50) {
-            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Teksten er for laaaaang. Maks lengde er 2000 tegn, men du pr¿vde deg med "+getInputTekst().length()));
-            log.debug("for lang tekst, skipper lagring");
-            return "redigerNyhet";
-        }
         nyhet.setTidlagtinn(new Date());
         nyhet.setLagNavn(getMenuBean().getSelectedLag().name());
         nyhet.setSesong(getMenuBean().getSelectedSesong().name());
