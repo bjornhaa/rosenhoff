@@ -14,11 +14,25 @@ start med java -jar squir.....jar (husk java 6)
 git repo: git@github.com:bjornhaa/rosenhoff.git
 
 
-For Œ deploye:
+PŒ serveren:
+
+h2 startes slik:
+nohup ./h2.sh -webAllowOthers
+i /home/rosenhoff/h2/bin
 
 ssh rosenhoff@50.56.73.163
 passord klikk11
 
+git pull
+passord klikk11
+
+mvn install
+
 stopp serveren: mvn jetty:stop
 
 start igjen: nohup mvn jetty:run
+
+jdbc url (til admi)
+
+url:http://50.56.73.163:8082/
+jdbc:h2:tcp://50.56.73.163/~/h2database/rosenhoff
