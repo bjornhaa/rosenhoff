@@ -92,6 +92,15 @@ body#index #header-wrapper {
     left: 20px;
     background: url(../images/rosenhoff_hockey-club_logo.png) no-repeat;
 }
+#sesong {
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    width: 150px;
+    height: 30px;
+    font-weight:bold;
+
+}
 
 #menu {
     position: absolute;
@@ -265,6 +274,20 @@ ul#teams li a.view-profile {
     line-height: 29px;
     text-align: center;
     color: #ffffff;
+    margin: 0 auto;
+}
+
+ul#teams li a.view-prev-season {
+    background: url(../images/view.jpg) no-repeat bottom center;
+    display: block;
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: 121px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    color: #00008b;
     margin: 0 auto;
 }
 

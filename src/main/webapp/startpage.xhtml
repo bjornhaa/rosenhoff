@@ -52,6 +52,11 @@
                                 <f:param name="lag" value="HOCKEY"/>
                                 <f:param name="sesong" value="SESONG_2011"/>
                             </t:commandLink>
+                            <t:commandLink value="2010/2011 &#187;" action="#{menuBean.setConstants}"
+                                           styleClass="view-prev-season">
+                                <f:param name="lag" value="HOCKEY"/>
+                                <f:param name="sesong" value="SESONG_2010"/>
+                            </t:commandLink>
                         </li>
                         <li>
                             <t:commandLink value="Rosenhoff Inline" action="#{menuBean.setConstants}"
@@ -64,6 +69,11 @@
                                 <f:param name="lag" value="INLINE"/>
                                 <f:param name="sesong" value="SESONG_2011"/>
                             </t:commandLink>
+                            <t:commandLink value="2010/2011 &#187;" action="#{menuBean.setConstants}"
+                                           styleClass="view-prev-season">
+                                <f:param name="lag" value="INLINE"/>
+                                <f:param name="sesong" value="SESONG_2010"/>
+                            </t:commandLink>
                         </li>
                         <li class="last">
                             <t:commandLink value="Rosenhoff Oldboys" action="#{menuBean.setConstants}"
@@ -75,6 +85,11 @@
                                            styleClass="view-profile">
                                 <f:param name="lag" value="OLDBOYS"/>
                                 <f:param name="sesong" value="SESONG_2011"/>
+                            </t:commandLink>
+                            <t:commandLink value="2010/2011 &#187;" action="#{menuBean.setConstants}"
+                                           styleClass="view-prev-season">
+                                <f:param name="lag" value="OLDBOYS"/>
+                                <f:param name="sesong" value="SESONG_2010"/>
                             </t:commandLink>
                         </li>
                     </ul>
