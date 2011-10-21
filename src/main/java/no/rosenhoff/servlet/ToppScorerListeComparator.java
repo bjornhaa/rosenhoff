@@ -22,8 +22,10 @@ public class ToppScorerListeComparator implements Comparator<ToppScorererElement
             return -1;
         } else if (o1.getMaal() < o2.getMaal()) {
             return 1;
-        } else {
+        } else if (o1.getPoengPrKamp().intValue() != 0 || o2.getPoengPrKamp().intValue() != 0) {
             return o1.getPoengPrKamp().compareTo(o2.getPoengPrKamp());
+        } else {
+            return o1.getKamper() - o1.getKamper();
         }
 
     }

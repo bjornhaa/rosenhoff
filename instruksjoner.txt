@@ -30,9 +30,9 @@ mvn install
 
 stopp serveren: mvn jetty:stop
 
-start igjen: nohup mvn jetty:run
+start igjen: nohup mvn jetty:run &
 
 jdbc url (til admi)
 
-url:http://50.56.73.163:8082/
+https://50.56.73.163:8082
 jdbc:h2:tcp://50.56.73.163/~/h2database/rosenhoff
