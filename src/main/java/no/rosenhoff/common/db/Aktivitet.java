@@ -24,6 +24,7 @@ public class Aktivitet implements java.io.Serializable {
     private Date ferdig;
     private String sesong;
     private String lagNavn;
+    private boolean poll;
 
     // Constructors
 
@@ -114,6 +115,15 @@ public class Aktivitet implements java.io.Serializable {
     public void setLagNavn(String lagNavn) {
         this.lagNavn = lagNavn;
 	}
+
+    @Column(name = "POLL", nullable = false)
+    public boolean getPoll() {
+        return poll;
+    }
+
+    public void setPoll(boolean poll) {
+        this.poll = poll;
+    }
 
     @Override
     public String toString() {

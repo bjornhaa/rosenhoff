@@ -66,6 +66,10 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>Deltakersjekk</td>
+                    <td><h:selectBooleanCheckbox id="selboolean" value="#{adminAktivitetBean.selectedAktivitet.aktivitet.poll}"/></td>
+                </tr>
+                <tr>
                     <td>
                         <t:commandButton value="Lagre" action="#{adminAktivitetBean.lagreAktivitet}"/>
                     </td>

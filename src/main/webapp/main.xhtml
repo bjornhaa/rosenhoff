@@ -1,11 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:t="http://myfaces.apache.org/tomahawk">
+      xmlns:t="http://myfaces.apache.org/tomahawk" xmlns:p="http://primefaces.prime.com.tr/ui">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <title>Hello World</title>
 </head>
 <body>
@@ -13,6 +15,68 @@
 
     <ui:define name="body">
         <div id="content-right">
+
+            <h:panelGroup rendered="#{not empty forsideBean.nesteAktivitet}">
+
+            <table style="width:auto;margin:0px;padding:0px">
+                <tr>
+                    <td>Skal du bli med på</td>
+                    <td>#{forsideBean.nesteAktivitet.hva}</td>
+                    <td>
+                        <t:outputText value="#{forsideBean.nesteAktivitet.naar}">
+                            <f:convertDateTime type="date" pattern="EEEEE dd MMM 'kl' HH:mm"
+                                               timeZone="#{menuBean.defaultTimeZone}"/>
+                        </t:outputText>
+
+                    </td>
+                </tr>
+            </table>
+            <table style="width:auto;">
+                <tr>
+                    <td>
+                        <img src="image?antNegative=#{forsideBean.selectedPoll.antNegative}&amp;antPositive=#{forsideBean.selectedPoll.antPositive}" alt="graf"/> 
+                    </td>
+                    <td>
+                        <table style="width:auto;">
+                            <tr>
+                                <td style="height:80px;vertical-align:bottom;">
+                                    <t:commandButton value="Jeg er med" style="background-color:lightgreen;" action="#{forsideBean.changeVote}">
+                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="1"/>
+                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="0"/>
+                                    </t:commandButton>
+                                </td>
+                                <td style="vertical-align:bottom;">
+                                    <t:commandButton value="kan ikke allikevel" style="background-color:lightgreen;" action="#{forsideBean.changeVote}">
+                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="-1"/>
+                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="1"/>
+                                    </t:commandButton>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:80px;vertical-align:middle;">
+                                    <t:commandButton value="Jeg er ikke med" style="background-color:yellow;" action="#{forsideBean.changeVote}">
+                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="0"/>
+                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="1"/>
+                                </t:commandButton>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                    <t:commandButton value="kan allikevel" style="background-color:yellow;" action="#{forsideBean.changeVote}">
+                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="1"/>
+                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="-1"/>
+                                    </t:commandButton>
+
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
+            <hr/>
+            <p/>
+            </h:panelGroup>
             <h2><span class="graybig">Nyheter</span></h2>
 
             <t:dataTable var="nyhet" value="#{forsideBean.nyheter}">
@@ -22,7 +86,8 @@
                         <h3><span class="greenbig">#{nyhet.overskrift}</span><br/>
                             <span class="date_news">Skrevet </span>
                             <t:outputText value="#{nyhet.tidlagtinn}" styleClass="date_news">
-                                <f:convertDateTime type="date" pattern="EEEEE dd MMM yyyy" timeZone="#{menuBean.defaultTimeZone}"/>
+                                <f:convertDateTime type="date" pattern="EEEEE dd MMM yyyy"
+                                                   timeZone="#{menuBean.defaultTimeZone}"/>
                             </t:outputText>
                         </h3>
 
@@ -30,7 +95,9 @@
                         </p>
                     </div>
                 </t:column>
+
             </t:dataTable>
+
         </div>
 
 

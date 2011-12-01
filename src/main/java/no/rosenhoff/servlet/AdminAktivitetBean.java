@@ -7,6 +7,8 @@ import no.rosenhoff.common.data.AktivitetGuiWrapper;
 import no.rosenhoff.common.data.AktivitetStedComparator;
 import no.rosenhoff.common.db.Aktivitet;
 import no.rosenhoff.common.db.AktivitetSted;
+import no.rosenhoff.common.db.Poll;
+import no.rosenhoff.common.db.PollDAO;
 import org.apache.log4j.Logger;
 
 import javax.faces.model.SelectItem;
@@ -74,10 +76,7 @@ public class AdminAktivitetBean extends ManagedBeans {
     }
 
     private void hentAktiviteter() {
-        Aktivitet nyAktivitet = new Aktivitet();
-        nyAktivitet.setSesong(menuBean.getSelectedSesong().name());
-        nyAktivitet.setLagNavn(menuBean.getSelectedLag().name());
-        List<Aktivitet> akt = aktivitetDAO.findByExample(nyAktivitet);
+        List<Aktivitet> akt = aktivitetDAO.findBySesongLag(menuBean.getSelectedSesong(), menuBean.getSelectedLag());
         aktiviteter = new ArrayList<AktivitetGuiWrapper>();
         for (Aktivitet aktivitet : akt) {
             AktivitetGuiWrapper aktivitetGuiWrapper = new AktivitetGuiWrapper(aktivitet);
@@ -87,7 +86,17 @@ public class AdminAktivitetBean extends ManagedBeans {
     }
 
     public String slettAktivitet() {
-        aktivitetDAO.delete(selectedAktivitet.getAktivitet());
+
+        Aktivitet aktivitet = selectedAktivitet.getAktivitet();
+        if (aktivitet.getPoll()) {
+            List<Poll> polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, aktivitet);
+            for (Poll poll : polls) {
+                getPollDAO().delete(poll);
+            }
+        }
+
+        aktivitetDAO.delete(aktivitet);
+
         nullStill();
         hentAktiviteter();
         return "redigerAktivitet";
@@ -111,6 +120,19 @@ public class AdminAktivitetBean extends ManagedBeans {
         aktivitet.setSesong(menuBean.getSelectedSesong().name());
 
         aktivitetDAO.attachDirty(aktivitet);
+        List<Poll> oldPoll = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, aktivitet.getId());
+        if (oldPoll.size() < 1 && aktivitet.getPoll()) {
+            log.debug("Legger inn ny tom poll");
+            Poll poll = new Poll();
+            poll.setAntNegative(0);
+            poll.setAntPositive(0);
+            poll.setAktivitetId(aktivitet.getId());
+            getPollDAO().save(poll);
+        } else if (!aktivitet.getPoll()) {
+            log.debug("Sletter poll");
+            getPollDAO().delete(oldPoll.get(0));
+        }
+
         nullStill();
         hentAktiviteter();
         return "redigerAktivitet";
@@ -123,7 +145,9 @@ public class AdminAktivitetBean extends ManagedBeans {
     }
 
     private void nullStill() {
-        selectedAktivitet = new AktivitetGuiWrapper(new Aktivitet());
+        Aktivitet aktivitet = new Aktivitet();
+        aktivitet.setPoll(true);
+        selectedAktivitet = new AktivitetGuiWrapper(aktivitet);
     }
 
     public List<SelectItem> getAktivitetSteder() {
@@ -137,13 +161,11 @@ public class AdminAktivitetBean extends ManagedBeans {
     }
 
     public void setNySted(String nySted) {
-        log.debug("Setter nytt sted");
         this.nySted = nySted;
         lagreSted();
     }
 
     public String getNySted() {
-        log.debug("getter ny sted");
         return nySted;
     }
 

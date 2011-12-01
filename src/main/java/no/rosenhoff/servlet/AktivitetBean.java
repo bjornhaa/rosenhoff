@@ -30,10 +30,7 @@ public class AktivitetBean extends ManagedBeans {
     private void lastAktiviteter() {
         getMenuBean().setActivePage(ActivePageEnum.AKTIVITET);
         aktiviteter = new ArrayList<Aktivitet>();        
-        Aktivitet example = new Aktivitet();
-        example.setLagNavn(menuBean.getSelectedLag().toString());
-        example.setSesong(menuBean.getSelectedSesong().toString());
-        List<Aktivitet> unFilteredaktiviteter = aktivitetDAO.findByExample(example);
+        List<Aktivitet> unFilteredaktiviteter = aktivitetDAO.findBySesongLag(menuBean.getSelectedSesong(),menuBean.getSelectedLag());
         Date now = new Date();
         for (Aktivitet aktivitet : unFilteredaktiviteter) {
             if (!aktivitet.getNaar().before(now)) {

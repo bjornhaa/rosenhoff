@@ -32,6 +32,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
                 <value>no.rosenhoff.common.db.KampSpiller</value>
                 <value>no.rosenhoff.common.db.Bruker</value>
                 <value>no.rosenhoff.common.db.AktivitetSted</value>
+                <value>no.rosenhoff.common.db.Poll</value>
                 <value>no.rosenhoff.common.db.Rapport</value></list>
         </property>
         <property name="hibernateProperties">
@@ -64,6 +65,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="menuBean" ref="menuBean"/>
         <property name="aktivitetStedDAO" ref="aktivitetStedDAO"/>
         <property name="rapportDAO" ref="rapportDAO"/>
+        <property name="pollDAO" ref="PollDAO"/>
     </bean>
 
     <bean id="adminNyheterBean" class="no.rosenhoff.servlet.AdminNyheterBean" parent="managedBeans" scope="session">
@@ -158,4 +160,11 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     	<property name="sessionFactory">
     		<ref bean="sessionFactory" />
     	</property>
-    </bean></beans>
+    </bean>
+    <bean id="PollDAO" class="no.rosenhoff.common.db.PollDAO">
+    	<property name="sessionFactory">
+    		<ref bean="sessionFactory" />
+    	</property>
+    </bean>
+
+</beans>

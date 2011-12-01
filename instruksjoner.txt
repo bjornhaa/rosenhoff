@@ -8,10 +8,12 @@ mvn jetty:run
 
 databaseadmin:
 Squirrel installert her: 
-/Users/bjornhaa/Downloads/squirrel-sql-3.0.2-standard/SQuirreL SQL Client
-start med java -jar squir.....jar (husk java 6)
+/Applications/squir....app
 
 git repo: git@github.com:bjornhaa/rosenhoff.git
+
+Hvis jeg får Caused by: java.lang.ClassNotFoundException: org.codehaus.plexus.classworlds.launcher.Launcher når jeg kjører mvn:
+bytt maven versjon:  http://www.gridshore.nl/2011/03/14/upgrade-maven-and-switch-between-versions-using-bash-on-the-mac/
 
 
 På serveren:

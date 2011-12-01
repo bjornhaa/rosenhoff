@@ -28,6 +28,8 @@ public abstract class ManagedBeans {
 
     protected RapportDAO rapportDAO;
 
+    protected PollDAO pollDAO;
+
     public AktivitetStedDAO getAktivitetStedDAO() {
         return aktivitetStedDAO;
     }
@@ -110,5 +112,13 @@ public abstract class ManagedBeans {
 
     public void setRapportDAO(RapportDAO rapportDAO) {
         this.rapportDAO = rapportDAO;
+    }
+
+    public PollDAO getPollDAO() {
+        return pollDAO;
+    }
+
+    public void setPollDAO(PollDAO pollDAO) {
+        this.pollDAO = pollDAO;
     }
 }
