@@ -118,7 +118,7 @@ public class AktivitetDAO extends HibernateDaoSupport {
     public List<Aktivitet> findBySesongLag(Sesong sesong, Lag lag) {
         log.debug("Finding by sesong and lag");
         try {
-            String queryString = "from Aktivitet as model where model.sesong = ? and model.lagNavn = ?";
+            String queryString = "from Aktivitet as model where model.sesong = ? and model.lagNavn = ? order by model.naar";
             Object[] values = new Object[] {sesong.name(),lag.name()};
             return getHibernateTemplate().find(queryString, values);
         } catch (RuntimeException re) {
