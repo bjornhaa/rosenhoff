@@ -16,7 +16,7 @@
         <span class="greenbig">Spillere</span>
 
         <p/>
-        Legg inn <t:commandLink value=" ny" action="nySpiller"/>
+        Legg inn <t:commandLink value=" ny" action="#{adminSpillerBean.nySpiller}"/>
 
         <t:dataTable var="spillerGuiWrapper" value="#{adminSpillerBean.spillere}" newspaperColumns="2">
             <f:facet name="spacer">
@@ -24,12 +24,11 @@
             </f:facet>
             <t:column>
                 <div class="players-img">
-                    <p:graphicImage id="spillerBilde" value="#{adminSpillerBean.streamImage}"
-                                    rendered="#{spillerGuiWrapper.spiller.bilde != null}" alt="spillerbilde">
-                        <f:param name="spillerId" value="#{spillerGuiWrapper.spiller.id}"/>
-                    </p:graphicImage>
+                    <h:panelGroup rendered="#{spillerGuiWrapper.spiller.imageExtension != null}">
+                        <img src="/image?funksjon=spillerBilde&amp;spillerId=#{spillerGuiWrapper.spiller.id}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}" alt="spillerbilde" />
+                    </h:panelGroup>
                     <t:graphicImage value="../images/old_hockey.jpg"
-                                    rendered="#{spillerGuiWrapper.spiller.bilde == null}" alt="defaultBilde"/>
+                                    rendered="#{spillerGuiWrapper.spiller.imageExtension == null}" alt="defaultBilde"/>
                 </div>
             </t:column>
             <t:column>

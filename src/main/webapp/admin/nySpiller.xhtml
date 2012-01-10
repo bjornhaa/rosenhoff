@@ -11,6 +11,7 @@
 <ui:composition template="admin_template_no_form.xhtml">
 
     <ui:define name="body">
+        <h:messages/>
         <h:form id="spillerForm" enctype="multipart/form-data" prependId="false">
             <table>
                 <tr>
@@ -37,23 +38,27 @@
                 <tr>
                     <td>SpillerBilde</td>
                     <td>
-                        <p:fileUpload
-                                fileUploadListener="#{adminSpillerBean.handleFileUpload}"   
-                                allowTypes="*.jpg;*.png;*.gif;"
-                                description="Images"
-                                id="uploadControl"
-                                sizeLimit="#{adminSpillerBean.fileSizeLimit}"/>
+                    <t:inputFileUpload id="fileupload"
+                               accept="image/*"
+                               value="#{adminSpillerBean.upFile}"
+                               storage="file"
+                               styleClass="fileUploadInput"
+                               required="false"
+                               maxlength="200000"/>
+                     <h:message for="fileupload" showDetail="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <t:commandButton value="upload" action="#{adminSpillerBean.upload}"/>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:graphicImage id="spillerBilde" value="#{adminSpillerBean.streamImage}"
-                                        rendered="#{adminSpillerBean.nySpiller.bilde != null}" alt="spillerbilde">
-                            <f:param name="spillerId" value="#{adminSpillerBean.nySpiller.id}"/>
-                        </p:graphicImage>
+                        <img src="/image?funksjon=spillerBilde&amp;spillerId=#{adminSpillerBean.nySpiller.id}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}" alt="spillerbilde" />
                     </td>
                 </tr>
-                <tr>
+                <tr align="right">
                     <td colspan="2"><h:commandButton action="#{adminSpillerBean.lagreSpiller}" value="lagre"/></td>
                 </tr>
             </table>

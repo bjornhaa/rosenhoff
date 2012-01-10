@@ -29,18 +29,6 @@ public class SpillerBean extends ManagedBeans {
         return spillere;
     }
 
-    public StreamedContent getStreamImage() throws SQLException {
-        Map<String, String> requestParamMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String spillerId = requestParamMap.get("spillerId");
-        if (spillerId != null) {
-            Spiller spiller = spillerDAO.findById(new Integer(spillerId));
-            InputStream stream = spiller.getBilde().getBinaryStream();
-            return new DefaultStreamedContent(stream);
-        } else {
-            InputStream stream = getClass().getResourceAsStream("../images/photo_default.jpg");
-            return new DefaultStreamedContent(stream);
-        }
-    }
     
 
     public String hent() {

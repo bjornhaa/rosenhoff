@@ -21,12 +21,11 @@
                 </f:facet>
                 <t:column>
                     <div class="players-img">
-                        <p:graphicImage id="spillerBilde" value="#{spillerBean.streamImage}"
-                                        rendered="#{spillerGuiWrapper.spiller.bilde != null}" alt="spillerbilde">
-                            <f:param name="spillerId" value="#{spillerGuiWrapper.spiller.id}"/>
-                        </p:graphicImage>
+                        <t:panelGroup rendered="#{spillerGuiWrapper.spiller.imageExtension != null}">
+                            <img src="/image?funksjon=spillerBilde&amp;spillerId=#{spillerGuiWrapper.spiller.id}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}" alt="spillerbilde" />
+                        </t:panelGroup>
                         <t:graphicImage value="../images/old_hockey.jpg"
-                                        rendered="#{spillerGuiWrapper.spiller.bilde == null}" alt="defaultBilde"/>
+                                        rendered="#{spillerGuiWrapper.spiller.imageExtension == null}" alt="defaultBilde"/>
                     </div>
                 </t:column>
                 <t:column>

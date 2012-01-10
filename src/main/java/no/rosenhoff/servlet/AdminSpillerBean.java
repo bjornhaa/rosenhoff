@@ -1,5 +1,6 @@
 package no.rosenhoff.servlet;
 
+import no.rosenhoff.common.data.Constants;
 import no.rosenhoff.common.data.SpillerGuiWrapper;
 import no.rosenhoff.common.db.KampSpiller;
 import no.rosenhoff.common.db.Poeng;
@@ -12,6 +13,10 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -29,33 +34,46 @@ public class AdminSpillerBean extends ManagedBeans {
 
     private Spiller nySpiller = new Spiller();
 
-    private org.primefaces.model.UploadedFile imageFile;
 
-    private StreamedContent streamImage;
-    private Spiller selectedSpiller;
+    UploadedFile upFile;
 
-    private Integer fileSizeLimit = 1024*300;
-
-    public Integer getFileSizeLimit() {
-        return fileSizeLimit;
+    public UploadedFile getUpFile() {
+        return upFile;
     }
 
-    public StreamedContent getStreamImage() throws SQLException {
-        Map<String, String> requestParamMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String spillerId = requestParamMap.get("spillerId");
-        if (spillerId != null) {
-            Spiller spiller = spillerDAO.findById(new Integer(spillerId));
-            InputStream stream = spiller.getBilde().getBinaryStream();
-            return new DefaultStreamedContent(stream);
-        } else {
-            InputStream stream = getClass().getResourceAsStream("../images/photo_default.jpg");
-            return new DefaultStreamedContent(stream);
+    public void setUpFile(UploadedFile upFile) {
+        this.upFile = upFile;
+    }
+
+    public String upload() throws IOException {
+        if (getSelectedSpiller().getId() == null) {
+            addInfoMessage("MŒ lagre spilleren f¿rst");
+            return "nySpiller";
+
         }
+        String contentType = upFile.getContentType();
+        String[] split = contentType.split("/");
+        if (split.length!= 2) {
+            throw new RuntimeException("kjer a, pr¿v ett bilde a");
+        }
+        if (!split[0].equalsIgnoreCase("image")) {
+            throw new RuntimeException("Bare bilder kan lastes opp");
+        }
+        String ext = split[1];
+        String path = Constants.UPLOAD_BASE_PATH +getMenuBean().getSelectedSesong()+"/"+getMenuBean().getSelectedLag()+"/"+ getSelectedSpiller().getId()+"." + ext;
+        File imageFile = new File(path);
+        imageFile.mkdirs();
+
+        BufferedImage bimg = ImageIO.read(upFile.getInputStream());
+        getSelectedSpiller().setImageExtension(ext);
+        getSpillerDAO().attachDirty(getSelectedSpiller());
+        ImageIO.write(bimg,ext,imageFile);
+
+        return "nySpiller";
+        
     }
 
-    public void setStreamImage(StreamedContent streamImage) {
-        this.streamImage = streamImage;
-    }
+    private Spiller selectedSpiller;
 
 
     public Spiller getNySpiller() {
@@ -98,11 +116,6 @@ public class AdminSpillerBean extends ManagedBeans {
 
         nySpiller.setSesong(getMenuBean().getSelectedSesong().name());
         nySpiller.setLagNavn(getMenuBean().getSelectedLag().name());
-        if (imageFile != null) {
-            log.debug("lagrer nytt bilde");
-            Blob image = new BlobImpl(imageFile.getContents());
-            nySpiller.setBilde(image);
-        }
         if (nySpiller.getId() == null) {
             spillerDAO.save(nySpiller);
         } else {
@@ -129,10 +142,13 @@ public class AdminSpillerBean extends ManagedBeans {
 
     }
 
-    public void handleFileUpload(FileUploadEvent event) {
-        log.debug("Uploaded file "+event.getFile().getFileName());
-        imageFile = event.getFile();
+    public String nySpiller() {
+        selectedSpiller = new Spiller();
+        nySpiller = new Spiller();
+        return "nySpiller";
+        
     }
+
 
     public Spiller getSelectedSpiller() {
         return selectedSpiller;

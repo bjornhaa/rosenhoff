@@ -1,9 +1,14 @@
 package no.rosenhoff.common.db;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 
 /**
  * Spiller entity. @author MyEclipse Persistence Tools
@@ -17,11 +22,12 @@ public class Spiller implements java.io.Serializable {
     private Integer id;
     private String navn;
     private String posisjon;
-    private Blob bilde;
     private String email;
     private String mobil;
     private String sesong;
     private String lagNavn;
+
+    private String imageExtension;
 
     // Constructors
 
@@ -42,11 +48,10 @@ public class Spiller implements java.io.Serializable {
     /**
      * full constructor
      */
-    public Spiller(String navn, String posisjon, Blob bilde, String email,
+    public Spiller(String navn, String posisjon,  String email,
                    String mobil, String sesong, String lagNavn) {
         this.navn = navn;
         this.posisjon = posisjon;
-        this.bilde = bilde;
         this.email = email;
         this.mobil = mobil;
         this.sesong = sesong;
@@ -85,14 +90,6 @@ public class Spiller implements java.io.Serializable {
         this.posisjon = posisjon;
     }
 
-    @Column(name = "BILDE")
-    public Blob getBilde() {
-        return this.bilde;
-    }
-
-    public void setBilde(Blob bilde) {
-        this.bilde = bilde;
-    }
 
     @Column(name = "EMAIL", length = 30)
     public String getEmail() {
@@ -128,6 +125,15 @@ public class Spiller implements java.io.Serializable {
 
     public void setLagNavn(String lagNavn) {
         this.lagNavn = lagNavn;
-	}
+    }
 
+
+    @Column(name = "IMAGE_EXTENSION", length = 6)
+    public String getImageExtension() {
+        return imageExtension;
+    }
+
+    public void setImageExtension(String imageExtension) {
+        this.imageExtension = imageExtension;
+    }
 }
