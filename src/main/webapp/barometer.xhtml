@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+<ui:composition template="template.xhtml">
+
+    <ui:define name="body">
+        <div id="content-right">
+            <h2><span class="graybig">barometer</span></h2>
+            <table>
+                <tr>
+                    <td>
+                        <table style="width:250px">
+                            <tr>
+                                <td>Spillere som kommer</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <t:dataTable var="poll" value="#{barometerBean.selectedPositivePolls}" style="width:250px">
+                                    <t:column style="vertical-align:middle;">
+                                        <f:facet name="header">Navn</f:facet>
+                                        #{poll.spiller.navn} (#{poll.spiller.lagNavn == 'HOCKEY' ? 'A-Lag' : 'Oldboys'})
+                                    </t:column>
+                                    <t:column>
+                                        <t:commandButton value="Fjern" action="#{barometerBean.fjern}">
+                                            <f:setPropertyActionListener target="#{barometerBean.selectedPollLinje}" value="#{poll}"/>
+                                        </t:commandButton>
+                                    </t:column>
+                                </t:dataTable>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table style="width:250px">
+                            <tr>
+                                <td>Spillere som ikke kommer</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <t:dataTable var="poll" value="#{barometerBean.selectedNegativePolls}" style="width:250px">
+                                    <t:column style="vertical-align:middle;">
+                                        <f:facet name="header">Navn</f:facet>
+                                        #{poll.spiller.navn} (#{poll.spiller.lagNavn == 'HOCKEY' ? 'A-Lag' : 'Oldboys'})
+                                    </t:column>
+                                    <t:column >
+                                        <t:commandButton value="Fjern" action="#{barometerBean.fjern}">
+                                            <f:setPropertyActionListener target="#{barometerBean.selectedPollLinje}" value="#{poll}"/>
+                                        </t:commandButton>
+                                    </t:column>
+                                </t:dataTable>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+
+                </tr>
+            </table>
+
+            <t:dataTable var="spiller" value="#{barometerBean.aLagSpillere}" renderedIfEmpty="false" style="width:500px">
+                <t:column style="vertical-align:middle;">
+                    <f:facet name="header">A-lagspillere</f:facet>
+                    #{spiller.navn}
+                </t:column>
+                <t:column>
+                    <t:commandButton value="Kommer" style="background-color:lightgreen"  action="#{barometerBean.addPositive}">
+                        <f:setPropertyActionListener target="#{barometerBean.selectedSpillerId}" value="#{spiller.id}"/>
+                    </t:commandButton>
+                </t:column>
+                <t:column>
+                    <t:commandButton value="Kommer ikke" style="background-color:IndianRed;color:black;" action="#{barometerBean.addNegative}">
+                        <f:setPropertyActionListener target="#{barometerBean.selectedSpillerId}" value="#{spiller.id}"/>
+                    </t:commandButton>
+                </t:column>
+            </t:dataTable>
+
+            <t:dataTable var="spiller" value="#{barometerBean.oldboysSpillere}" renderedIfEmpty="false" style="width:500px">
+                <t:column style="vertical-align:middle;">
+                    <f:facet name="header">Oldboysspillere</f:facet>
+                    #{spiller.navn}
+                </t:column>
+                <t:column>
+                    <t:commandButton value="Kommer" style="background-color:lightgreen"  action="#{barometerBean.addPositive}">
+                        <f:setPropertyActionListener target="#{barometerBean.selectedSpillerId}" value="#{spiller.id}"/>
+                    </t:commandButton>
+                </t:column>
+                <t:column>
+                    <t:commandButton value="Kommer ikke" style="background-color:IndianRed;color:black;" action="#{barometerBean.addNegative}">
+                        <f:setPropertyActionListener target="#{barometerBean.selectedSpillerId}" value="#{spiller.id}"/>
+                    </t:commandButton>
+                </t:column>
+            </t:dataTable>
+
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+</body>
+</html>

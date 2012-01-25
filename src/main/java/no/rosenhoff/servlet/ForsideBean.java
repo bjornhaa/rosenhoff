@@ -14,54 +14,38 @@ public class ForsideBean extends ManagedBeans {
 
     private List<no.rosenhoff.common.db.Nyhet> nyheter;
 
-    private Integer positiveAdjust = 0;
-    private Integer negativeAdjust = 0;
 
-    public Integer getNegativeAdjust() {
-        return negativeAdjust;
+    public int getAntPositive() {
+        List<Poll> polls = getSelectedPolls();
+        int antPositive = 0;
+        for (Poll poll : polls) {
+            if (poll.isKommer()) {
+                antPositive++;
+            }
+        }
+        return antPositive;
     }
 
-    public void setNegativeAdjust(Integer negativeAdjust) {
-        this.negativeAdjust = negativeAdjust;
+    public int getAntNegative() {
+        List<Poll> polls = getSelectedPolls();
+        int antNegative = 0;
+        for (Poll poll : polls) {
+            if (poll.isKommer() == false) {
+                antNegative++;
+            }
+        }
+        return antNegative;
     }
 
-    private Poll selectedPoll;
-
-    public Poll getSelectedPoll() {
+    public List<Poll> getSelectedPolls() {
         Aktivitet nesteAktivitet = getNesteAktivitet();
-        List<Poll> polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, nesteAktivitet.getId());
-        if (polls.size() != 1) {
-            throw new RuntimeException("Feil antall polls. Var "+polls.size());
+        List<Poll> polls = new ArrayList<Poll>();
+        if (nesteAktivitet != null) {
+            polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, nesteAktivitet.getId());
         }
-        return polls.get(0);
+        return polls;
     }
 
-    public Integer getPositiveAdjust() {
-        return positiveAdjust;
-    }
-
-    public void setPositiveAdjust(Integer positiveAdjust) {
-        this.positiveAdjust = positiveAdjust;
-    }
-
-    public String changeVote() {
-        Aktivitet nesteAktivitet = getNesteAktivitet();
-        List<Poll> polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, nesteAktivitet.getId());
-        Poll poll = polls.get(0);
-        poll.setAntPositive(poll.getAntPositive()+ positiveAdjust);
-        if (poll.getAntPositive() < 0) {
-            poll.setAntPositive(0);
-        }
-        poll.setAntNegative(poll.getAntNegative()+negativeAdjust);
-        if (poll.getAntNegative() < 0) {
-            poll.setAntNegative(0);
-        }
-
-
-        getPollDAO().attachDirty(poll);
-
-        return null;
-    }
 
     public List<Nyhet> getNyheter() {
         hentNyheter();
@@ -78,7 +62,7 @@ public class ForsideBean extends ManagedBeans {
     }
 
     public Aktivitet getNesteAktivitet() {
-        return getAktivitetDAO().findNextActivity(getMenuBean().getSelectedSesong(),getMenuBean().getSelectedLag());
+        return getAktivitetDAO().findNextActivity(getMenuBean().getSelectedSesong(), getMenuBean().getSelectedLag());
     }
 
 

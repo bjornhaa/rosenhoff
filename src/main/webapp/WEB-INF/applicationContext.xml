@@ -76,6 +76,9 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean id="forsideBean" class="no.rosenhoff.servlet.ForsideBean" parent="managedBeans" scope="session">
     </bean>
 
+    <bean id="barometerBean" class="no.rosenhoff.servlet.BarometerBean" parent="managedBeans" scope="session">
+    </bean>
+
 
     <bean id="adminResultatBean" class="no.rosenhoff.servlet.AdminResultatBean" parent="managedBeans" scope="session">
         <property name="adminSpillerKampBean" ref="adminSpillerKampBean"/>

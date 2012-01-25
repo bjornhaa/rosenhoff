@@ -115,6 +115,11 @@
             <to-view-id>/kamprapporter.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>barometer</from-outcome>
+            <to-view-id>/barometer.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
 
     </navigation-rule>
     <validator>

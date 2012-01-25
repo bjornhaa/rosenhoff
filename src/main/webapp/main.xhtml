@@ -20,7 +20,7 @@
 
             <table style="width:auto;margin:0px;padding:0px">
                 <tr>
-                    <td>Skal du bli med på</td>
+                    <td>Oppmøtebarometer på</td>
                     <td>#{forsideBean.nesteAktivitet.hva}</td>
                     <td>
                         <t:outputText value="#{forsideBean.nesteAktivitet.naar}">
@@ -31,44 +31,16 @@
                     </td>
                 </tr>
             </table>
-            <table style="width:auto;">
+            <table style="width:auto;border:1px black">
                 <tr>
                     <td>
-                        <img src="image?funksjon=poll&amp;antNegative=#{forsideBean.selectedPoll.antNegative}&amp;antPositive=#{forsideBean.selectedPoll.antPositive}" alt="graf"/> 
+                       <img src="image?funksjon=poll&amp;antNegative=#{forsideBean.antNegative}&amp;antPositive=#{forsideBean.antPositive}" alt="graf"/>
                     </td>
-                    <td>
-                        <table style="width:auto;">
-                            <tr>
-                                <td style="height:80px;vertical-align:bottom;">
-                                    <t:commandButton value="Jeg er med" style="background-color:lightgreen;" action="#{forsideBean.changeVote}">
-                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="1"/>
-                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="0"/>
-                                    </t:commandButton>
-                                </td>
-                                <td style="vertical-align:bottom;">
-                                    <t:commandButton value="kan ikke allikevel" style="background-color:lightgreen;" action="#{forsideBean.changeVote}">
-                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="-1"/>
-                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="1"/>
-                                    </t:commandButton>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="height:80px;vertical-align:middle;">
-                                    <t:commandButton value="Jeg er ikke med" style="background-color:yellow;" action="#{forsideBean.changeVote}">
-                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="0"/>
-                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="1"/>
-                                </t:commandButton>
-                                </td>
-                                <td style="vertical-align:middle;">
-                                    <t:commandButton value="kan allikevel" style="background-color:yellow;" action="#{forsideBean.changeVote}">
-                                        <f:setPropertyActionListener target="#{forsideBean.positiveAdjust}" value="1"/>
-                                        <f:setPropertyActionListener target="#{forsideBean.negativeAdjust}" value="-1"/>
-                                    </t:commandButton>
-
-                                </td>
-                            </tr>
-
-                        </table>
+                    <td style="vertical-align:middle;">
+                        <t:commandButton value="Oppdater" action="#{barometerBean.lastBarometer}">
+                            <f:setPropertyActionListener target="#{barometerBean.selectedAktivitet}" value="#{forsideBean.nesteAktivitet}"/>
+                        </t:commandButton>
+                        status, eller se oppmøte
                     </td>
                 </tr>
             </table>

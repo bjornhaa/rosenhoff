@@ -120,17 +120,13 @@ public class AdminAktivitetBean extends ManagedBeans {
         aktivitet.setSesong(menuBean.getSelectedSesong().name());
 
         aktivitetDAO.attachDirty(aktivitet);
-        List<Poll> oldPoll = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, aktivitet.getId());
-        if (oldPoll.size() < 1 && aktivitet.getPoll()) {
-            log.debug("Legger inn ny tom poll");
-            Poll poll = new Poll();
-            poll.setAntNegative(0);
-            poll.setAntPositive(0);
-            poll.setAktivitetId(aktivitet.getId());
-            getPollDAO().save(poll);
-        } else if (!aktivitet.getPoll()) {
+        List<Poll> oldPolls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, aktivitet.getId());
+        if (!aktivitet.getPoll()) {
             log.debug("Sletter poll");
-            getPollDAO().delete(oldPoll.get(0));
+            for (Poll poll : oldPolls) {
+                getPollDAO().delete(poll);
+            }
+
         }
 
         nullStill();

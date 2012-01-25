@@ -10,9 +10,9 @@ public class Poll {
 
     private Integer id;
     private Integer aktivitetId;
-    private Integer antPositive;
-    private Integer antNegative;
     private String label;
+    private Integer spillerId;
+    private boolean kommer;
 
     @GenericGenerator(name = "generator", strategy = "increment")
     @Id
@@ -35,22 +35,13 @@ public class Poll {
         this.aktivitetId = aktivitetId;
     }
 
-    @Column(name = "ANT_POSITIVE", nullable = false)
-    public Integer getAntPositive() {
-        return antPositive;
+    @Column(name = "SPILLER_ID", nullable = false)
+    public Integer getSpillerId() {
+        return spillerId;
     }
 
-    public void setAntPositive(Integer antPositive) {
-        this.antPositive = antPositive;
-    }
-
-    @Column(name = "ANT_NEGATIVE", nullable = false)
-    public Integer getAntNegative() {
-        return antNegative;
-    }
-
-    public void setAntNegative(Integer antNegative) {
-        this.antNegative = antNegative;
+    public void setSpillerId(Integer spillerId) {
+        this.spillerId = spillerId;
     }
 
     @Column(name = "LABEL", nullable = false)
@@ -60,5 +51,14 @@ public class Poll {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    @Column(name = "KOMMER", nullable = false)
+    public boolean isKommer() {
+        return kommer;
+    }
+
+    public void setKommer(boolean kommer) {
+        this.kommer = kommer;
     }
 }

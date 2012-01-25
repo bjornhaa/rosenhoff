@@ -23,10 +23,10 @@ nohup ./h2.sh -webAllowOthers
 i /home/rosenhoff/h2/bin
 
 ssh rosenhoff@50.56.73.163
-passord klikk11
+passord vanlig enkelt
 
 git pull
-passord klikk11
+passord vanlig enkelt
 
 mvn install
 
