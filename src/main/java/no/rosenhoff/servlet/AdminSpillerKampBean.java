@@ -70,7 +70,6 @@ public class AdminSpillerKampBean extends ManagedBeans {
         for (SpillerGuiWrapper spillerGuiWrapper : spillere) {
             if (spillerGuiWrapper.isSelected()) {
                 Spiller spiller = spillerGuiWrapper.getSpiller();
-                log.debug("lagrer spiller " + spiller.getNavn());
                 KampSpiller kampSpiller = new KampSpiller();
                 kampSpiller.setSpillerId(spiller.getId());
                 kampSpiller.setKampId(selectedKamp.getId());
@@ -84,7 +83,6 @@ public class AdminSpillerKampBean extends ManagedBeans {
     public String lagreSpilerPoeng() {
         for (SpillerGuiWrapper spillerGuiWrapper : spillereIKamp) {
             if (spillerGuiWrapper.getMaal() != null && spillerGuiWrapper.getMaal() > 0) {
-                log.debug("lagrer " + spillerGuiWrapper.getMaal() + " maal for " + spillerGuiWrapper.getSpiller().getNavn());
                 Poeng poeng = new Poeng();
                 poeng.setErpass(false);
                 poeng.setAntPoeng(spillerGuiWrapper.getMaal());
@@ -95,7 +93,6 @@ public class AdminSpillerKampBean extends ManagedBeans {
                 poengDAO.save(poeng);
             }
             if (spillerGuiWrapper.getPass() != null && spillerGuiWrapper.getPass() > 0) {
-                log.debug("lagrer " + spillerGuiWrapper.getPass() + " pass for " + spillerGuiWrapper.getSpiller().getNavn());
                 Poeng poeng = new Poeng();
                 poeng.setErpass(true);
                 poeng.setAntPoeng(spillerGuiWrapper.getPass());

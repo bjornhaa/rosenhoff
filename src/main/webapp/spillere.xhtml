@@ -15,29 +15,29 @@
 
     <ui:define name="body">
         <div id="content-right">
-            <t:dataTable var="spillerGuiWrapper" value="#{spillerBean.spillere}" newspaperColumns="2">
+            <t:dataTable var="personGuiWrapper" value="#{personBean.personer}" newspaperColumns="2">
                 <f:facet name="spacer">
                     <f:verbatim> &nbsp; </f:verbatim>
                 </f:facet>
                 <t:column>
                     <div class="players-img">
-                        <t:panelGroup rendered="#{spillerGuiWrapper.spiller.imageExtension != null}">
-                            <img src="/image?funksjon=spillerBilde&amp;spillerId=#{spillerGuiWrapper.spiller.id}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}" alt="spillerbilde" />
+                        <t:panelGroup rendered="#{personGuiWrapper.person.imageExtension != null}">
+                            <img src="/image?funksjon=spillerBilde&amp;spillerId=#{personGuiWrapper.person.id}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}" alt="spillerbilde" />
                         </t:panelGroup>
                         <t:graphicImage value="../images/old_hockey.jpg"
-                                        rendered="#{spillerGuiWrapper.spiller.imageExtension == null}" alt="defaultBilde"/>
+                                        rendered="#{personGuiWrapper.person.imageExtension == null}" alt="defaultBilde"/>
                     </div>
                 </t:column>
                 <t:column>
                     <div class="players-data">
                         <dl>
-                            <dt>#{spillerGuiWrapper.spiller.navn}</dt>
-                            <dd><span class="graylight">Posisjon: </span>#{spillerGuiWrapper.posisjon}</dd>
+                            <dt>#{personGuiWrapper.person.navn}</dt>
+                            <dd><span class="graylight">Posisjon: </span>bla</dd>
 
-                            <dd><span class="graylight">Mobil: </span>#{spillerGuiWrapper.spiller.mobil}</dd>
+                            <dd><span class="graylight">Mobil: </span>#{personGuiWrapper.person.mobil}</dd>
 
                             <dd><span class="graylight">Email: </span> <a
-                                    href="mailto:#{spillerGuiWrapper.spiller.email}">#{spillerGuiWrapper.spiller.email}</a>
+                                    href="mailto:#{personGuiWrapper.person.email}">#{personGuiWrapper.person.email}</a>
                             </dd>
                         </dl>
                     </div>

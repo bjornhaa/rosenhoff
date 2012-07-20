@@ -14,6 +14,7 @@ import java.util.Comparator;
 public class SpillerComparator implements Comparator<Spiller> {
 
     public int compare(Spiller spiller1, Spiller spiller2) {
-        return spiller1.getNavn().compareTo(spiller2.getNavn()); 
+        throw new RuntimeException("ikke implementert");
+        //return spiller1.getNavn().compareTo(spiller2.getNavn()); 
     }
 }

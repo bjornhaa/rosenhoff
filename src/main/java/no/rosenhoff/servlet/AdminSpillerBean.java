@@ -2,28 +2,16 @@ package no.rosenhoff.servlet;
 
 import no.rosenhoff.common.data.Constants;
 import no.rosenhoff.common.data.SpillerGuiWrapper;
-import no.rosenhoff.common.db.KampSpiller;
-import no.rosenhoff.common.db.Poeng;
 import no.rosenhoff.common.db.Spiller;
 import org.apache.log4j.Logger;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
-import org.hibernate.lob.BlobImpl;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
-import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AdminSpillerBean extends ManagedBeans {
 
@@ -65,7 +53,7 @@ public class AdminSpillerBean extends ManagedBeans {
         imageFile.mkdirs();
 
         BufferedImage bimg = ImageIO.read(upFile.getInputStream());
-        getSelectedSpiller().setImageExtension(ext);
+        //getSelectedSpiller().setImageExtension(ext);
         getSpillerDAO().attachDirty(getSelectedSpiller());
         ImageIO.write(bimg,ext,imageFile);
 

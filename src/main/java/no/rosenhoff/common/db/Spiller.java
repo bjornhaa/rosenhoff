@@ -20,42 +20,22 @@ public class Spiller implements java.io.Serializable {
     // Fields
 
     private Integer id;
-    private String navn;
     private String posisjon;
-    private String email;
-    private String mobil;
     private String sesong;
     private String lagNavn;
+    private Integer personId;
 
-    private String imageExtension;
-
-    // Constructors
-
-    /**
-     * default constructor
-     */
     public Spiller() {
-    }
-
-    /**
-     * minimal constructor
-     */
-    public Spiller(String navn, String lagNavn) {
-        this.navn = navn;
-        this.lagNavn = lagNavn;
     }
 
     /**
      * full constructor
      */
-    public Spiller(String navn, String posisjon,  String email,
-                   String mobil, String sesong, String lagNavn) {
-        this.navn = navn;
+    public Spiller(String posisjon, String sesong, String lagNavn, Integer personId) {
         this.posisjon = posisjon;
-        this.email = email;
-        this.mobil = mobil;
         this.sesong = sesong;
         this.lagNavn = lagNavn;
+        this.personId = personId;
     }
 
     // Property accessors
@@ -72,16 +52,8 @@ public class Spiller implements java.io.Serializable {
         this.id = id;
     }
 
-    @Column(name = "NAVN", nullable = false, length = 30)
-    public String getNavn() {
-        return this.navn;
-    }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
-    }
-
-    @Column(name = "POSISJON", length = 3)
+    @Column(name = "POSISJON", nullable = false,length = 3)
     public String getPosisjon() {
         return this.posisjon;
     }
@@ -91,25 +63,9 @@ public class Spiller implements java.io.Serializable {
     }
 
 
-    @Column(name = "EMAIL", length = 30)
-    public String getEmail() {
-        return this.email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    @Column(name = "MOBIL", length = 15)
-    public String getMobil() {
-        return this.mobil;
-    }
-
-    public void setMobil(String mobil) {
-        this.mobil = mobil;
-    }
-
-    @Column(name = "SESONG", length = 15)
+    @Column(name = "SESONG", nullable = false,length = 15)
     public String getSesong() {
         return this.sesong;
     }
@@ -127,13 +83,12 @@ public class Spiller implements java.io.Serializable {
         this.lagNavn = lagNavn;
     }
 
-
-    @Column(name = "IMAGE_EXTENSION", length = 6)
-    public String getImageExtension() {
-        return imageExtension;
+    @Column(name = "PERSON_ID", nullable = false)
+    public Integer getPersonId() {
+        return personId;
     }
 
-    public void setImageExtension(String imageExtension) {
-        this.imageExtension = imageExtension;
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 }

@@ -12,7 +12,8 @@ import java.math.RoundingMode;
  */
 public class ToppScorererElement {
 
-    private Spiller spiller;
+
+    private Person person;
 
     private int maal = 0;
 
@@ -20,13 +21,6 @@ public class ToppScorererElement {
 
     private int kamper = 0;
 
-    public Spiller getSpiller() {
-        return spiller;
-    }
-
-    public void setSpiller(Spiller spiller) {
-        this.spiller = spiller;
-    }
 
     public int getMaal() {
         return maal;
@@ -54,6 +48,14 @@ public class ToppScorererElement {
 
     public int getTotal() {
         return maal+pass;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public BigDecimal getPoengPrKamp() {

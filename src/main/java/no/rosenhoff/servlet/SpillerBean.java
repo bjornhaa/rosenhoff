@@ -2,15 +2,9 @@ package no.rosenhoff.servlet;
 
 import no.rosenhoff.common.data.SpillerGuiWrapper;
 import no.rosenhoff.common.db.Spiller;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
-import javax.faces.context.FacesContext;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.

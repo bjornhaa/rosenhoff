@@ -30,6 +30,9 @@ public abstract class ManagedBeans {
 
     protected PollDAO pollDAO;
 
+    protected PersonDAO personDAO;
+
+
     public AktivitetStedDAO getAktivitetStedDAO() {
         return aktivitetStedDAO;
     }
@@ -120,5 +123,13 @@ public abstract class ManagedBeans {
 
     public void setPollDAO(PollDAO pollDAO) {
         this.pollDAO = pollDAO;
+    }
+
+    public PersonDAO getPersonDAO() {
+        return personDAO;
+    }
+
+    public void setPersonDAO(PersonDAO personDAO) {
+        this.personDAO = personDAO;
     }
 }

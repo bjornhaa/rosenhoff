@@ -10,30 +10,30 @@ import java.util.List;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Spiller entities. Transaction control of the save(), update() and delete()
+ * Person entities. Transaction control of the save(), update() and delete()
  * operations can directly support Spring container-managed transactions or they
  * can be augmented to handle user-managed Spring transactions. Each of these
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  *
  * @author MyEclipse Persistence Tools
- * @see no.rosenhoff.common.db.Spiller
+ * @see Person
  */
 
-public class SpillerDAO extends HibernateDaoSupport {
-    private static final Log log = LogFactory.getLog(SpillerDAO.class);
+public class PersonDAO extends HibernateDaoSupport {
+    private static final Log log = LogFactory.getLog(PersonDAO.class);
     // property constants
-    public static final String POSISJON = "posisjon";
-    public static final String SESONG = "sesong";
-    public static final String LAG_NAVN = "lagNavn";
-    public static final String SPILLER_ID = "spillerId";
+    public static final String NAVN = "navn";
+    public static final String EMAIL = "email";
+    public static final String MOBIL = "mobil";
+    public static final String IMAGE_EXTENSION = "imageExtension";
 
     protected void initDao() {
         // do nothing
     }
 
-    public void save(Spiller transientInstance) {
-        log.debug("saving Spiller instance");
+    public void save(Person transientInstance) {
+        log.debug("saving Person instance");
         try {
             getHibernateTemplate().save(transientInstance);
             log.debug("save successful");
@@ -43,8 +43,8 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public void delete(Spiller persistentInstance) {
-        log.debug("deleting Spiller instance");
+    public void delete(Person persistentInstance) {
+        log.debug("deleting Person instance");
         try {
             getHibernateTemplate().delete(persistentInstance);
             log.debug("delete successful");
@@ -54,11 +54,11 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public Spiller findById(java.lang.Integer id) {
-        log.debug("getting Spiller instance with id: " + id);
+    public Person findById(Integer id) {
+        log.debug("getting Person instance with id: " + id);
         try {
-            Spiller instance = (Spiller) getHibernateTemplate().get(
-                    "no.rosenhoff.common.db.Spiller", id);
+            Person instance = (Person) getHibernateTemplate().get(
+                    "no.rosenhoff.common.db.Person", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -66,10 +66,10 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public List<Spiller> findByExample(Spiller instance) {
-        log.debug("finding Spiller instance by example");
+    public List<Person> findByExample(Person instance) {
+        log.debug("finding Person instance by example");
         try {
-            List<Spiller> results = (List<Spiller>) getHibernateTemplate()
+            List<Person> results = (List<Person>) getHibernateTemplate()
                     .findByExample(instance);
             log.debug("find by example successful, result size: "
                     + results.size());
@@ -81,10 +81,10 @@ public class SpillerDAO extends HibernateDaoSupport {
     }
 
     public List findByProperty(String propertyName, Object value) {
-        log.debug("finding Spiller instance with property: " + propertyName
+        log.debug("finding Person instance with property: " + propertyName
                 + ", value: " + value);
         try {
-            String queryString = "from Spiller as model where model."
+            String queryString = "from Person as model where model."
                     + propertyName + "= ?";
             return getHibernateTemplate().find(queryString, value);
         } catch (RuntimeException re) {
@@ -94,23 +94,11 @@ public class SpillerDAO extends HibernateDaoSupport {
     }
 
 
-    public List<Spiller> findByPosisjon(Object posisjon) {
-        return findByProperty(POSISJON, posisjon);
-    }
-
-
-    public List<Spiller> findBySesong(Object sesong) {
-        return findByProperty(SESONG, sesong);
-    }
-
-    public List<Spiller> findByLagNavn(Object lagNavn) {
-        return findByProperty(LAG_NAVN, lagNavn);
-    }
 
     public List findAll() {
-        log.debug("finding all Spiller instances");
+        log.debug("finding all Person instances");
         try {
-            String queryString = "from Spiller";
+            String queryString = "from Person";
             return getHibernateTemplate().find(queryString);
         } catch (RuntimeException re) {
             log.error("find all failed", re);
@@ -118,10 +106,10 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public Spiller merge(Spiller detachedInstance) {
-        log.debug("merging Spiller instance");
+    public Person merge(Person detachedInstance) {
+        log.debug("merging Person instance");
         try {
-            Spiller result = (Spiller) getHibernateTemplate().merge(
+            Person result = (Person) getHibernateTemplate().merge(
                     detachedInstance);
             log.debug("merge successful");
             return result;
@@ -131,8 +119,8 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public void attachDirty(Spiller instance) {
-        log.debug("attaching dirty Spiller instance");
+    public void attachDirty(Person instance) {
+        log.debug("attaching dirty Person instance");
         try {
             getHibernateTemplate().saveOrUpdate(instance);
             log.debug("attach successful");
@@ -142,8 +130,8 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public void attachClean(Spiller instance) {
-        log.debug("attaching clean Spiller instance");
+    public void attachClean(Person instance) {
+        log.debug("attaching clean Person instance");
         try {
             getHibernateTemplate().lock(instance, LockMode.NONE);
             log.debug("attach successful");
@@ -153,7 +141,7 @@ public class SpillerDAO extends HibernateDaoSupport {
         }
     }
 
-    public static SpillerDAO getFromApplicationContext(ApplicationContext ctx) {
-        return (SpillerDAO) ctx.getBean("spillerDAO");
+    public static PersonDAO getFromApplicationContext(ApplicationContext ctx) {
+        return (PersonDAO) ctx.getBean("p“ersonDAO");
     }
 }

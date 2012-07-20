@@ -12,7 +12,8 @@ import java.util.Comparator;
 public class SpillerPollWrapperComparator implements Comparator<SpillerPollWrapper> {
 
     public int compare(SpillerPollWrapper spilerPoll1, SpillerPollWrapper spillerPoll2) {
-        return spilerPoll1.getSpiller().getNavn().toLowerCase().compareTo(spillerPoll2.getSpiller().getNavn().toLowerCase());
+        throw new RuntimeException("ikke implementert");
+        //return spilerPoll1.getSpiller().getNavn().toLowerCase().compareTo(spillerPoll2.getSpiller().getNavn().toLowerCase());
 
     }
 }

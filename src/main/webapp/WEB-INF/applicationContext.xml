@@ -33,6 +33,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
                 <value>no.rosenhoff.common.db.Bruker</value>
                 <value>no.rosenhoff.common.db.AktivitetSted</value>
                 <value>no.rosenhoff.common.db.Poll</value>
+                <value>no.rosenhoff.common.db.Person</value>
                 <value>no.rosenhoff.common.db.Rapport</value></list>
         </property>
         <property name="hibernateProperties">
@@ -66,6 +67,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="aktivitetStedDAO" ref="aktivitetStedDAO"/>
         <property name="rapportDAO" ref="rapportDAO"/>
         <property name="pollDAO" ref="PollDAO"/>
+        <property name="personDAO" ref="personDAO"/>
     </bean>
 
     <bean id="adminNyheterBean" class="no.rosenhoff.servlet.AdminNyheterBean" parent="managedBeans" scope="session">
@@ -93,6 +95,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     </bean>
 
     <bean id="spillerBean" class="no.rosenhoff.servlet.SpillerBean" parent="managedBeans" scope="session"/>
+
+    <bean id="personBean" class="no.rosenhoff.servlet.PersonBean" parent="managedBeans" scope="session"/>
 
     <bean id="posisjonList" class="no.rosenhoff.common.data.Posisjon" factory-method="getAllAsList"/>
 
@@ -131,6 +135,10 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     </bean>
 
     <bean id="spillerDAO" class="no.rosenhoff.common.db.SpillerDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="personDAO" class="no.rosenhoff.common.db.PersonDAO">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
