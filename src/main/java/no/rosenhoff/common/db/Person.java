@@ -50,17 +50,17 @@ public class Person {
         return navn;
     }
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL")
     public String getEmail() {
         return email;
     }
 
-    @Column(name = "MOBIL", nullable = false)
+    @Column(name = "MOBIL")
     public String getMobil() {
         return mobil;
     }
 
-    @Column(name = "IMAGE_EXTENSION", nullable = false)
+    @Column(name = "IMAGE_EXTENSION")
     public String getImageExtension() {
         return imageExtension;
     }

@@ -22,10 +22,12 @@
                 <t:column>
                     <div class="players-img">
                         <t:panelGroup rendered="#{personGuiWrapper.person.imageExtension != null}">
-                            <img src="/image?funksjon=spillerBilde&amp;spillerId=#{personGuiWrapper.person.id}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}" alt="spillerbilde" />
+                            <img src="/image?funksjon=personBilde&amp;personId=#{personGuiWrapper.person.id}"
+                                 alt="spillerbilde"/>
                         </t:panelGroup>
                         <t:graphicImage value="../images/old_hockey.jpg"
-                                        rendered="#{personGuiWrapper.person.imageExtension == null}" alt="defaultBilde"/>
+                                        rendered="#{personGuiWrapper.person.imageExtension == null}"
+                                        alt="defaultBilde"/>
                     </div>
                 </t:column>
                 <t:column>

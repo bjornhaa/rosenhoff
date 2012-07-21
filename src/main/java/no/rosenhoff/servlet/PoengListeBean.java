@@ -1,10 +1,8 @@
 package no.rosenhoff.servlet;
 
-import no.rosenhoff.common.db.Spiller;
-import no.rosenhoff.common.db.ToppScorerDao;
+import no.rosenhoff.common.db.JDBCDao;
 import no.rosenhoff.common.db.ToppScorererElement;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,15 +18,9 @@ public class PoengListeBean extends ManagedBeans {
     private List<ToppScorererElement> toppScorereListe;
 
     public List<ToppScorererElement> getToppScorereListe() {
-        toppScorereListe = toppScorerDao.getToppScorerListe(menuBean.getSelectedSesong(),menuBean.getSelectedLag());
-        Collections.sort(toppScorereListe,new ToppScorerListeComparator());
+        toppScorereListe = getJdbcDao().getToppScorerListe(menuBean.getSelectedSesong(), menuBean.getSelectedLag());
+        Collections.sort(toppScorereListe, new ToppScorerListeComparator());
         return toppScorereListe;
-    }
-
-    private ToppScorerDao toppScorerDao;
-
-    public void setToppScorerDao(ToppScorerDao toppScorerDao) {
-        this.toppScorerDao = toppScorerDao;
     }
 
 

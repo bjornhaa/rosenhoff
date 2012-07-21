@@ -58,7 +58,7 @@ public class AdminSpillerKampBean extends ManagedBeans {
         spiller.setLagNavn(getMenuBean().getSelectedLag().name());
         List<Spiller> spillerList = spillerDAO.findByExample(spiller);
         for (Spiller spillerRes : spillerList) {
-            tmp.add(new SpillerGuiWrapper(spillerRes));
+            tmp.add(new SpillerGuiWrapper(spillerRes, null));
         }
         return tmp;
     }

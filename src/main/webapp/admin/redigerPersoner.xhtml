@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
+<body>
+<ui:composition template="admin_template.xhtml">
+
+    <ui:define name="body">
+        <span class="graybig">Rediger</span>
+        <span class="greenbig">Personer</span>
+
+        <p/>
+        Legg inn <t:commandLink value=" ny" action="#{adminPersonBean.nyPerson}"/>
+
+        <t:dataTable var="personGuiWrapper" value="#{adminPersonBean.personer}" newspaperColumns="2">
+            <f:facet name="spacer">
+                <f:verbatim> &nbsp; </f:verbatim>
+            </f:facet>
+            <t:column>
+                <div class="players-img">
+                    <h:panelGroup rendered="#{personGuiWrapper.person.imageExtension != null}">
+                        <img src="/image?funksjon=personBilde&amp;personId=#{personGuiWrapper.person.id}"
+                             alt="personbilde"/>
+                    </h:panelGroup>
+                    <t:graphicImage value="../images/old_hockey.jpg"
+                                    rendered="#{personGuiWrapper.person.imageExtension == null}" alt="defaultBilde"/>
+                </div>
+            </t:column>
+            <t:column>
+                <div class="players-data">
+                    <dl>
+                        <dt>#{personGuiWrapper.person.navn}</dt>
+                        <dd><span class="graylight">Mobil: </span>#{personGuiWrapper.person.mobil}</dd>
+
+                        <dd><span class="graylight">Email: </span> <a
+                                href="mailto:#{personGuiWrapper.person.email}">#{personGuiWrapper.person.email}</a>
+                        </dd>
+                    </dl>
+                    <table>
+                        <tr>
+                            <td><h:commandButton value="Slett" action="#{adminPersonBean.slett}">
+                                <f:setPropertyActionListener target="#{adminPersonBean.selectedPerson}"
+                                                             value="#{personGuiWrapper.person}"/>
+                            </h:commandButton>
+                            </td>
+                            <td><t:commandButton value="Editer" action="#{adminPersonBean.edit}">
+                                <f:setPropertyActionListener target="#{adminPersonBean.selectedPerson}"
+                                                             value="#{personGuiWrapper.person}"/>
+                            </t:commandButton>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t:column>
+        </t:dataTable>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

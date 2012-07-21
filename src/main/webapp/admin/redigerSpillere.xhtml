@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,60 +6,42 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:t="http://myfaces.apache.org/tomahawk"
-      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
 <body>
 <ui:composition template="admin_template.xhtml">
 
     <ui:define name="body">
-        <span class="graybig">Rediger</span>
-        <span class="greenbig">Spillere</span>
 
-        <p/>
-        Legg inn <t:commandLink value=" ny" action="#{adminSpillerBean.nySpiller}"/>
+        <h:panelGroup id="body">
+            <span class="graybig">Rediger</span>
+            <span class="greenbig">Spillere</span>
 
-        <t:dataTable var="spillerGuiWrapper" value="#{adminSpillerBean.spillere}" newspaperColumns="2">
-            <f:facet name="spacer">
-                <f:verbatim> &nbsp; </f:verbatim>
-            </f:facet>
-            <t:column>
-                <div class="players-img">
-                    <h:panelGroup rendered="#{spillerGuiWrapper.spiller.imageExtension != null}">
-                        <img src="/image?funksjon=spillerBilde&amp;spillerId=#{spillerGuiWrapper.spiller.id}&amp;lag=#{adminSpillerBean.menuBean.selectedLag}&amp;sesong=#{adminSpillerBean.menuBean.selectedSesong}" alt="spillerbilde" />
+            <p/>
+            Alle registrerte personer:
+            <t:dataTable var="personWrapper" value="#{adminSpillerBean.personer}">
+                <t:column style="vertical-align:middle;">
+                    <f:facet name="header">navn</f:facet>
+                    #{personWrapper.person.navn}
+                </t:column>
+                <t:column style="vertical-align:middle;">
+                    <f:facet
+                            name="header">Aktiv i #{menuBean.selectedLag} sesongen #{menuBean.selectedSesong.displayText}</f:facet>
+                    <h:panelGroup rendered="#{personWrapper.spiller}">
+                        <t:commandButton rendered="#{ not personWrapper.kamper}" value="Deaktiver"
+                                         action="#{adminSpillerBean.deAktiverSpiller}">
+                            <f:setPropertyActionListener target="#{adminSpillerBean.selectedPerson}"
+                                                         value="#{personWrapper}"/>
+                        </t:commandButton>
+                        <h:outputText rendered="#{personWrapper.kamper}" value="Aktiv, og har kamper"/>
                     </h:panelGroup>
-                    <t:graphicImage value="../images/old_hockey.jpg"
-                                    rendered="#{spillerGuiWrapper.spiller.imageExtension == null}" alt="defaultBilde"/>
-                </div>
-            </t:column>
-            <t:column>
-                <div class="players-data">
-                    <dl>
-                        <dt>#{spillerGuiWrapper.spiller.navn}</dt>
-                        <dd><span class="graylight">Posisjon: </span>#{spillerGuiWrapper.posisjon}</dd>
-
-                        <dd><span class="graylight">Mobil: </span>#{spillerGuiWrapper.spiller.mobil}</dd>
-
-                        <dd><span class="graylight">Email: </span> <a
-                                href="mailto:#{spillerGuiWrapper.spiller.email}">#{spillerGuiWrapper.spiller.email}</a>
-                        </dd>
-                    </dl>
-                    <table>
-                        <tr>
-                            <td><h:commandButton value="Slett" action="#{adminSpillerBean.slett}">
-                                <f:setPropertyActionListener target="#{adminSpillerBean.selectedSpiller}"
-                                                             value="#{spillerGuiWrapper.spiller}"/>
-                            </h:commandButton>
-                            </td>
-                            <td><t:commandButton value="Editer" action="#{adminSpillerBean.edit}">
-                                <f:setPropertyActionListener target="#{adminSpillerBean.selectedSpiller}"
-                                                             value="#{spillerGuiWrapper.spiller}"/>
-                            </t:commandButton>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </t:column>
-        </t:dataTable>
+                    <t:commandButton rendered="#{ not personWrapper.spiller}" value="Aktiver"
+                                     action="#{adminSpillerBean.aktiverSpiller}">
+                        <f:setPropertyActionListener target="#{adminSpillerBean.selectedPerson}"
+                                                     value="#{personWrapper}"/>
+                    </t:commandButton>
+                </t:column>
+            </t:dataTable>
+        </h:panelGroup>
     </ui:define>
 </ui:composition>
 </body>

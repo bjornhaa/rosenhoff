@@ -1,5 +1,6 @@
 package no.rosenhoff.common.data;
 
+import no.rosenhoff.common.db.Person;
 import no.rosenhoff.common.db.Spiller;
 import org.apache.log4j.Logger;
 
@@ -16,12 +17,36 @@ public class SpillerGuiWrapper {
 
     private Spiller spiller;
 
+    private Person person;
+
     private boolean selected = false;
 
 
     private Integer pass;
 
     private Integer maal;
+
+
+    public SpillerGuiWrapper(Spiller spiller, Person person) {
+        this.person = person;
+        this.spiller = spiller;
+    }
+
+    public Spiller getSpiller() {
+        return spiller;
+    }
+
+    public void setSpiller(Spiller spiller) {
+        this.spiller = spiller;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public Posisjon getPosisjon() {
         return Posisjon.fromKode(spiller.getPosisjon());
@@ -43,23 +68,7 @@ public class SpillerGuiWrapper {
         this.maal = maal;
     }
 
-    public SpillerGuiWrapper(Spiller spiller) {
-        this.spiller = spiller;
-    }
-
-    public Spiller getSpiller() {
-        return spiller;
-    }
-
-    public void setSpiller(Spiller spiller) {
-        this.spiller = spiller;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public Person getPerson() {
+        return person;
     }
 }

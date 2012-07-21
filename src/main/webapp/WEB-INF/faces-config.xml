@@ -91,13 +91,18 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>redigerSpiller</from-outcome>
+            <from-outcome>redigerPerson</from-outcome>
+            <to-view-id>/admin/redigerPersoner.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>redigerSpillere</from-outcome>
             <to-view-id>/admin/redigerSpillere.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>nySpiller</from-outcome>
-            <to-view-id>/admin/nySpiller.xhtml</to-view-id>
+            <from-outcome>nyPerson</from-outcome>
+            <to-view-id>/admin/nyPerson.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>

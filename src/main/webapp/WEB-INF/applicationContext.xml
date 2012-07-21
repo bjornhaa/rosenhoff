@@ -34,7 +34,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
                 <value>no.rosenhoff.common.db.AktivitetSted</value>
                 <value>no.rosenhoff.common.db.Poll</value>
                 <value>no.rosenhoff.common.db.Person</value>
-                <value>no.rosenhoff.common.db.Rapport</value></list>
+                <value>no.rosenhoff.common.db.Rapport</value>
+            </list>
         </property>
         <property name="hibernateProperties">
             <props>
@@ -50,7 +51,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         </property>
     </bean>
 
-    <bean name="toppScorerDato" class="no.rosenhoff.common.db.ToppScorerDao">
+    <bean name="jdbcDao" class="no.rosenhoff.common.db.JDBCDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
@@ -68,6 +69,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="rapportDAO" ref="rapportDAO"/>
         <property name="pollDAO" ref="PollDAO"/>
         <property name="personDAO" ref="personDAO"/>
+        <property name="jdbcDao" ref="jdbcDao"/>
     </bean>
 
     <bean id="adminNyheterBean" class="no.rosenhoff.servlet.AdminNyheterBean" parent="managedBeans" scope="session">
@@ -86,15 +88,14 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="adminSpillerKampBean" ref="adminSpillerKampBean"/>
     </bean>
 
-    <bean id="adminSpillerBean" class="no.rosenhoff.servlet.AdminSpillerBean" parent="managedBeans" scope="session">
-    </bean>
+    <bean id="adminPersonBean" class="no.rosenhoff.servlet.AdminPersonBean" parent="managedBeans" scope="session"/>
+
+    <bean id="adminSpillerBean" class="no.rosenhoff.servlet.AdminSpillerBean" parent="managedBeans" scope="session"/>
 
 
     <bean id="adminSpillerKampBean" class="no.rosenhoff.servlet.AdminSpillerKampBean" parent="managedBeans"
           scope="session">
     </bean>
-
-    <bean id="spillerBean" class="no.rosenhoff.servlet.SpillerBean" parent="managedBeans" scope="session"/>
 
     <bean id="personBean" class="no.rosenhoff.servlet.PersonBean" parent="managedBeans" scope="session"/>
 
@@ -103,9 +104,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean id="adminAktivitetBean" class="no.rosenhoff.servlet.AdminAktivitetBean" parent="managedBeans"
           scope="session"/>
 
-    <bean id="poengListeBean" class="no.rosenhoff.servlet.PoengListeBean" parent="managedBeans" scope="session">
-        <property name="toppScorerDao" ref="toppScorerDato"/>
-     </bean>
+    <bean id="poengListeBean" class="no.rosenhoff.servlet.PoengListeBean" parent="managedBeans" scope="session"/>
 
     <bean id="nyheterBean" class="no.rosenhoff.servlet.NyheterBean" parent="managedBeans" scope="session"/>
 
@@ -163,19 +162,19 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="rapportDAO" class="no.rosenhoff.common.db.RapportDAO">
-    	<property name="sessionFactory">
-    		<ref bean="sessionFactory" />
-    	</property>
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
     </bean>
     <bean id="RapportDAO" class="no.rosenhoff.common.db.RapportDAO">
-    	<property name="sessionFactory">
-    		<ref bean="sessionFactory" />
-    	</property>
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
     </bean>
     <bean id="PollDAO" class="no.rosenhoff.common.db.PollDAO">
-    	<property name="sessionFactory">
-    		<ref bean="sessionFactory" />
-    	</property>
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
     </bean>
 
 </beans>

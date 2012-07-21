@@ -65,12 +65,10 @@ public class ImageServingServlet extends HttpServlet {
             ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
 
             close(outputStream);
-        } else if (funksjon.equals("spillerBilde")) {
-            String spilerId = request.getParameter("spillerId");
-            String lag = request.getParameter("lag");
-            String sesong = request.getParameter("sesong");
+        } else if (funksjon.equals("personBilde")) {
+            String spilerId = request.getParameter("personId");
 
-            String path = Constants.UPLOAD_BASE_PATH + sesong + "/" + lag + "/" + spilerId + "." + "jpeg";
+            String path = Constants.UPLOAD_BASE_PATH + "/" + spilerId + "." + "jpeg";
 
             File imageFile = new File(path);
             byte[] bilde;

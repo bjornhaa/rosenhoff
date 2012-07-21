@@ -41,6 +41,12 @@
                 </h:commandLink>
             </li>
             <li>
+                <h:commandLink action="#{adminPersonBean.redigerPersoner}"
+                               styleClass="#{(menuBean.activePage == 'REDIGER_PERSONER') ? 'active' : ''}">
+                    <h:outputText value="Endre personer"/>
+                </h:commandLink>
+            </li>
+            <li>
                 <h:commandLink action="#{adminSpillerBean.redigerSpillere}"
                                styleClass="#{(menuBean.activePage == 'REDIGER_SPILLERE') ? 'active' : ''}">
                     <h:outputText value="Endre spillere"/>

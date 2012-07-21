@@ -1,11 +1,17 @@
 package no.rosenhoff.common.db;
 
+import no.rosenhoff.common.data.Lag;
+import no.rosenhoff.common.data.Sesong;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,9 +34,11 @@ public class PersonDAO extends HibernateDaoSupport {
     public static final String MOBIL = "mobil";
     public static final String IMAGE_EXTENSION = "imageExtension";
 
+
     protected void initDao() {
         // do nothing
     }
+
 
     public void save(Person transientInstance) {
         log.debug("saving Person instance");
@@ -92,7 +100,6 @@ public class PersonDAO extends HibernateDaoSupport {
             throw re;
         }
     }
-
 
 
     public List findAll() {

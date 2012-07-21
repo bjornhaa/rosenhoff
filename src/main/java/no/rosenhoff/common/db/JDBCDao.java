@@ -17,7 +17,7 @@ import java.util.List;
  * Time: 10:04:52 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ToppScorerDao {
+public class JDBCDao {
 
     private SimpleJdbcTemplate jdbcTemplate;
 
@@ -56,9 +56,36 @@ public class ToppScorerDao {
         };
 
 
+        return this.jdbcTemplate.query(sql, mapper, sesong.name(), lag.toString(), sesong.name(), lag.toString(), sesong.name(), lag.toString(), sesong.name(), lag.toString());
 
-        return this.jdbcTemplate.query(sql,mapper,sesong.name(),lag.toString(),sesong.name(),lag.toString(),sesong.name(),lag.toString(), sesong.name(),lag.toString());
-        
+    }
+
+
+    public List<PersonAsSpiller> findPersonMedSpillerFlag(Sesong sesong, Lag lag) {
+        String personSpillerSql = "select s.id as spiller_id, p.*, " +
+                "                              exists (select 1 FROM SPILLER s where s.PERSON_ID = p.id and s.LAG_NAVN = ? and s.SESONG = ?) as spiller," +
+                "                              exists (select 1 from spiller s, KAMP_SPILLER ks where s.PERSON_ID = p.id and ks.spiller_id = s.id and s.LAG_NAVN = ? and s.SESONG = ?) as har_kamper " +
+                "from person p " +
+                "left join SPILLER s " +
+                "on s.PERSON_ID = p.id and s.LAG_NAVN = ? and s.SESONG = ? " +
+                "order by spiller desc,p.navn";
+
+        ParameterizedRowMapper<PersonAsSpiller> mapper = new ParameterizedRowMapper<PersonAsSpiller>() {
+
+            public PersonAsSpiller mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Person person = new Person();
+                Integer spillerId = rs.getInt(1);
+                person.setId(rs.getInt(2));
+                person.setNavn(rs.getString("navn"));
+                person.setEmail(rs.getString("email"));
+                person.setMobil(rs.getString("mobil"));
+                person.setImageExtension(rs.getString("IMAGE_EXTENSION"));
+                boolean isSpiller = rs.getBoolean("spiller");
+                boolean kamper = rs.getBoolean("har_kamper");
+                return new PersonAsSpiller(person, isSpiller, kamper, spillerId);
+            }
+        };
+        return this.jdbcTemplate.query(personSpillerSql, mapper, lag.name(), sesong.name(), lag.name(), sesong.name(), lag.name(), sesong.name());
     }
 
 }

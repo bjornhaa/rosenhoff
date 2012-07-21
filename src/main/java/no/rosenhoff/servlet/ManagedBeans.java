@@ -31,6 +31,7 @@ public abstract class ManagedBeans {
     protected PollDAO pollDAO;
 
     protected PersonDAO personDAO;
+    private JDBCDao jdbcDao;
 
 
     public AktivitetStedDAO getAktivitetStedDAO() {
@@ -131,5 +132,13 @@ public abstract class ManagedBeans {
 
     public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
+    }
+
+    public void setJdbcDao(JDBCDao jdbcDao) {
+        this.jdbcDao = jdbcDao;
+    }
+
+    public JDBCDao getJdbcDao() {
+        return jdbcDao;
     }
 }
