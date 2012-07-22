@@ -19,7 +19,7 @@ bytt maven versjon:  http://www.gridshore.nl/2011/03/14/upgrade-maven-and-switch
 PŒ serveren:
 
 h2 startes slik:
-nohup ./h2.sh -webAllowOthers
+nohup ./h2.sh -webAllowOthers -tcpAllowOthers &
 i /home/rosenhoff/h2/bin
 
 ssh rosenhoff@50.56.73.163
