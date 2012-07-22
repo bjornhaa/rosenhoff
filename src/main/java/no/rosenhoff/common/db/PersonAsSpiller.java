@@ -17,6 +17,13 @@ public class PersonAsSpiller {
 
     private final Integer spillerId;
 
+    private boolean selected;
+
+    private Integer pass;
+
+    private Integer maal;
+
+
     public PersonAsSpiller(Person person, boolean spiller, boolean kamper, Integer spillerId) {
         this.person = person;
         this.spiller = spiller;
@@ -38,5 +45,29 @@ public class PersonAsSpiller {
 
     public Integer getSpillerId() {
         return spillerId;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public Integer getPass() {
+        return pass;
+    }
+
+    public void setPass(Integer pass) {
+        this.pass = pass;
+    }
+
+    public Integer getMaal() {
+        return maal;
+    }
+
+    public void setMaal(Integer maal) {
+        this.maal = maal;
     }
 }

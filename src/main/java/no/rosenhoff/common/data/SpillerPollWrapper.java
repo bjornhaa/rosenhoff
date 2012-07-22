@@ -1,5 +1,6 @@
 package no.rosenhoff.common.data;
 
+import no.rosenhoff.common.db.Person;
 import no.rosenhoff.common.db.Poll;
 import no.rosenhoff.common.db.Spiller;
 
@@ -14,18 +15,18 @@ public class SpillerPollWrapper {
 
     private Poll poll;
 
-    private Spiller spiller;
+    private Person person;
 
-    public SpillerPollWrapper(Poll poll, Spiller spiller) {
+    public SpillerPollWrapper(Poll poll, Person person) {
         this.poll = poll;
-        this.spiller = spiller;
+        this.person = person;
     }
 
     public Poll getPoll() {
         return poll;
     }
 
-    public Spiller getSpiller() {
-        return spiller;
+    public Person getPerson() {
+        return person;
     }
 }

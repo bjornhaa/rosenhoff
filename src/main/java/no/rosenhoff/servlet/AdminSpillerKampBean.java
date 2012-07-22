@@ -1,10 +1,7 @@
 package no.rosenhoff.servlet;
 
 import no.rosenhoff.common.data.SpillerGuiWrapper;
-import no.rosenhoff.common.db.Kamp;
-import no.rosenhoff.common.db.KampSpiller;
-import no.rosenhoff.common.db.Poeng;
-import no.rosenhoff.common.db.Spiller;
+import no.rosenhoff.common.db.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -24,23 +21,20 @@ public class AdminSpillerKampBean extends ManagedBeans {
 
     private Kamp selectedKamp;
 
-    private List<SpillerGuiWrapper> spillere = new ArrayList<SpillerGuiWrapper>();
+    private List<PersonAsSpiller> spillere = new ArrayList<PersonAsSpiller>();
 
-    private List<SpillerGuiWrapper> spillereIKamp = new ArrayList<SpillerGuiWrapper>();
+    private List<PersonAsSpiller> spillereIKamp = new ArrayList<PersonAsSpiller>();
 
 
-    public List<SpillerGuiWrapper> getSpillereIKamp() {
+    public List<PersonAsSpiller> getSpillereIKamp() {
         return spillereIKamp;
     }
 
-    public List<SpillerGuiWrapper> getSpillere() {
+    public List<PersonAsSpiller> getSpillere() {
         spillere = hentSpillere();
         return spillere;
     }
 
-    public void setSpillere(List<SpillerGuiWrapper> spillere) {
-        this.spillere = spillere;
-    }
 
     public Kamp getSelectedKamp() {
         return selectedKamp;
@@ -51,27 +45,25 @@ public class AdminSpillerKampBean extends ManagedBeans {
     }
 
 
-    private List<SpillerGuiWrapper> hentSpillere() {
-        List<SpillerGuiWrapper> tmp = new ArrayList<SpillerGuiWrapper>();
-        Spiller spiller = new Spiller();
-        spiller.setSesong(getMenuBean().getSelectedSesong().name());
-        spiller.setLagNavn(getMenuBean().getSelectedLag().name());
-        List<Spiller> spillerList = spillerDAO.findByExample(spiller);
-        for (Spiller spillerRes : spillerList) {
-            tmp.add(new SpillerGuiWrapper(spillerRes, null));
+    private List<PersonAsSpiller> hentSpillere() {
+        List<PersonAsSpiller> tmp = jdbcDao.findPersonMedSpillerFlag(getMenuBean().getSelectedSesong(), getMenuBean().getSelectedLag());
+        for (PersonAsSpiller personAsSpiller : tmp) {
+            if (personAsSpiller.isSpiller()) {
+                spillere.add(personAsSpiller);
+            }
         }
-        return tmp;
+
+        return spillere;
     }
 
 
     public String lagreSpillerKamp() {
-        spillereIKamp = new ArrayList<SpillerGuiWrapper>();
+        spillereIKamp = new ArrayList<PersonAsSpiller>();
 
-        for (SpillerGuiWrapper spillerGuiWrapper : spillere) {
+        for (PersonAsSpiller spillerGuiWrapper : spillere) {
             if (spillerGuiWrapper.isSelected()) {
-                Spiller spiller = spillerGuiWrapper.getSpiller();
                 KampSpiller kampSpiller = new KampSpiller();
-                kampSpiller.setSpillerId(spiller.getId());
+                kampSpiller.setSpillerId(spillerGuiWrapper.getSpillerId());
                 kampSpiller.setKampId(selectedKamp.getId());
                 kampSpillerDAO.save(kampSpiller);
                 spillereIKamp.add(spillerGuiWrapper);
@@ -81,7 +73,7 @@ public class AdminSpillerKampBean extends ManagedBeans {
     }
 
     public String lagreSpilerPoeng() {
-        for (SpillerGuiWrapper spillerGuiWrapper : spillereIKamp) {
+        for (PersonAsSpiller spillerGuiWrapper : spillereIKamp) {
             if (spillerGuiWrapper.getMaal() != null && spillerGuiWrapper.getMaal() > 0) {
                 Poeng poeng = new Poeng();
                 poeng.setErpass(false);
@@ -89,7 +81,7 @@ public class AdminSpillerKampBean extends ManagedBeans {
                 poeng.setKampId(selectedKamp.getId());
                 poeng.setLagNavn(getMenuBean().getSelectedLag().name());
                 poeng.setSesong(getMenuBean().getSelectedSesong().name());
-                poeng.setSpiller(spillerGuiWrapper.getSpiller().getId());
+                poeng.setSpiller(spillerGuiWrapper.getSpillerId());
                 poengDAO.save(poeng);
             }
             if (spillerGuiWrapper.getPass() != null && spillerGuiWrapper.getPass() > 0) {
@@ -99,7 +91,7 @@ public class AdminSpillerKampBean extends ManagedBeans {
                 poeng.setKampId(selectedKamp.getId());
                 poeng.setLagNavn(getMenuBean().getSelectedLag().name());
                 poeng.setSesong(getMenuBean().getSelectedSesong().name());
-                poeng.setSpiller(spillerGuiWrapper.getSpiller().getId());
+                poeng.setSpiller(spillerGuiWrapper.getSpillerId());
                 poengDAO.save(poeng);
             }
         }

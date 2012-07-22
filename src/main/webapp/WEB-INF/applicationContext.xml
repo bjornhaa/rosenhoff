@@ -101,6 +101,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
     <bean id="posisjonList" class="no.rosenhoff.common.data.Posisjon" factory-method="getAllAsList"/>
 
+    <bean id="sesongList" class="no.rosenhoff.common.data.Sesong" factory-method="getAllAsList"/>
+
     <bean id="adminAktivitetBean" class="no.rosenhoff.servlet.AdminAktivitetBean" parent="managedBeans"
           scope="session"/>
 

@@ -105,7 +105,7 @@ public class PersonDAO extends HibernateDaoSupport {
     public List findAll() {
         log.debug("finding all Person instances");
         try {
-            String queryString = "from Person";
+            String queryString = "from Person order by navn";
             return getHibernateTemplate().find(queryString);
         } catch (RuntimeException re) {
             log.error("find all failed", re);

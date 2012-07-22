@@ -5,6 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:t="http://myfaces.apache.org/tomahawk">
 <head>
     <title>Rosenhoff</title>
@@ -13,6 +14,7 @@
     <script type="text/javascript" src="js/unitpngfix.js"></script>
 </head>
 <body id="index">
+<p:resources/>
 <h:form>
     <div id="maincontainer">
         <div id="header-wrapper">
@@ -31,7 +33,7 @@
                     </p>
                     <t:commandLink value="Les mer &#187;" action="#{menuBean.setConstants}">
                         <f:param name="lag" value="OLDBOYS"/>
-                        <f:param name="sesong" value="SESONG_2011"/>
+                        <f:param name="sesong" value="SESONG_2012"/>
                         <f:param name="history" value="true"/>
                     </t:commandLink>
                 </div>
@@ -45,52 +47,28 @@
                         <li>
                             <t:commandLink value="Rosenhoff A-lag" action="#{menuBean.setConstants}" styleClass="team1">
                                 <f:param name="lag" value="HOCKEY"/>
-                                <f:param name="sesong" value="SESONG_2011"/>
+                                <f:param name="sesong" value="SESONG_2012"/>
                             </t:commandLink>
-                            <t:commandLink value="Gå til siden &#187;" action="#{menuBean.setConstants}"
-                                           styleClass="view-profile">
-                                <f:param name="lag" value="HOCKEY"/>
-                                <f:param name="sesong" value="SESONG_2011"/>
-                            </t:commandLink>
-                            <t:commandLink value="2010/2011 &#187;" action="#{menuBean.setConstants}"
-                                           styleClass="view-prev-season">
-                                <f:param name="lag" value="HOCKEY"/>
-                                <f:param name="sesong" value="SESONG_2009"/>
-                            </t:commandLink>
+                            <h:outputLink styleClass="view-profile" value="javascript:void(0)"
+                                          onclick="dlgHockey.show()">Tidligere sesonger</h:outputLink>
                         </li>
                         <li>
                             <t:commandLink value="Rosenhoff Inline" action="#{menuBean.setConstants}"
                                            styleClass="team2">
                                 <f:param name="lag" value="INLINE"/>
-                                <f:param name="sesong" value="SESONG_2011"/>
+                                <f:param name="sesong" value="SESONG_2012"/>
                             </t:commandLink>
-                            <t:commandLink value="Gå til siden &#187;" action="#{menuBean.setConstants}"
-                                           styleClass="view-profile">
-                                <f:param name="lag" value="INLINE"/>
-                                <f:param name="sesong" value="SESONG_2011"/>
-                            </t:commandLink>
-                            <t:commandLink value="2010/2011 &#187;" action="#{menuBean.setConstants}"
-                                           styleClass="view-prev-season">
-                                <f:param name="lag" value="INLINE"/>
-                                <f:param name="sesong" value="SESONG_2009"/>
-                            </t:commandLink>
+                            <h:outputLink styleClass="view-profile" value="javascript:void(0)"
+                                          onclick="dlgInline.show()">Tidligere sesonger</h:outputLink>
                         </li>
                         <li class="last">
                             <t:commandLink value="Rosenhoff Oldboys" action="#{menuBean.setConstants}"
                                            styleClass="team3">
                                 <f:param name="lag" value="OLDBOYS"/>
-                                <f:param name="sesong" value="SESONG_2011"/>
+                                <f:param name="sesong" value="SESONG_2012"/>
                             </t:commandLink>
-                            <t:commandLink value="Gå til siden &#187;" action="#{menuBean.setConstants}"
-                                           styleClass="view-profile">
-                                <f:param name="lag" value="OLDBOYS"/>
-                                <f:param name="sesong" value="SESONG_2011"/>
-                            </t:commandLink>
-                            <t:commandLink value="2010/2011 &#187;" action="#{menuBean.setConstants}"
-                                           styleClass="view-prev-season">
-                                <f:param name="lag" value="OLDBOYS"/>
-                                <f:param name="sesong" value="SESONG_2009"/>
-                            </t:commandLink>
+                            <h:outputLink styleClass="view-profile" value="javascript:void(0)"
+                                          onclick="dlgOldboys.show()">Tidligere sesonger</h:outputLink>
                         </li>
                     </ul>
 
@@ -117,6 +95,43 @@
             </div>
         </div>
     </div>
+
+</h:form>
+
+<h:form id="velgSesongForm">
+    <p:dialog header="Velg sesong" width="300" widgetVar="dlgHockey" visible="false" modal="true">
+        <t:dataTable var="sesong" value="#{sesongList}">
+            <t:column>
+                <t:commandLink value="#{sesong.displayText} &#187;" action="#{menuBean.setConstants}">
+                    <f:param name="sesong" value="#{sesong}"/>
+                    <f:param name="lag" value="HOCKEY"/>
+                </t:commandLink>
+            </t:column>
+        </t:dataTable>
+    </p:dialog>
+
+    <p:dialog header="Velg sesong" width="300" widgetVar="dlgInline" visible="false" modal="true">
+        <t:dataTable var="sesong" value="#{sesongList}">
+            <t:column>
+                <t:commandLink value="#{sesong.displayText} &#187;" action="#{menuBean.setConstants}">
+                    <f:param name="sesong" value="#{sesong}"/>
+                    <f:param name="lag" value="INLINE"/>
+                </t:commandLink>
+            </t:column>
+        </t:dataTable>
+    </p:dialog>
+
+    <p:dialog header="Velg sesong" width="300" widgetVar="dlgOldboys" visible="false" modal="true">
+        <t:dataTable var="sesong" value="#{sesongList}">
+            <t:column>
+                <t:commandLink value="#{sesong.displayText} &#187;" action="#{menuBean.setConstants}">
+                    <f:param name="sesong" value="#{sesong}"/>
+                    <f:param name="lag" value="OLDBOYS"/>
+                </t:commandLink>
+            </t:column>
+        </t:dataTable>
+    </p:dialog>
+
 </h:form>
 </body>
 </html>

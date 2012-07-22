@@ -31,7 +31,8 @@ public abstract class ManagedBeans {
     protected PollDAO pollDAO;
 
     protected PersonDAO personDAO;
-    private JDBCDao jdbcDao;
+
+    protected JDBCDao jdbcDao;
 
 
     public AktivitetStedDAO getAktivitetStedDAO() {

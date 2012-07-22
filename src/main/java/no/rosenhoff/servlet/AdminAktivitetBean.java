@@ -89,7 +89,7 @@ public class AdminAktivitetBean extends ManagedBeans {
 
         Aktivitet aktivitet = selectedAktivitet.getAktivitet();
         if (aktivitet.getPoll()) {
-            List<Poll> polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, aktivitet);
+            List<Poll> polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, aktivitet.getId());
             for (Poll poll : polls) {
                 getPollDAO().delete(poll);
             }

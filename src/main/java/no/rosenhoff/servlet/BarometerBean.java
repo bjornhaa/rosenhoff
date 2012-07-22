@@ -4,10 +4,7 @@ import no.rosenhoff.common.data.Lag;
 import no.rosenhoff.common.data.SpillerComparator;
 import no.rosenhoff.common.data.SpillerPollWrapper;
 import no.rosenhoff.common.data.SpillerPollWrapperComparator;
-import no.rosenhoff.common.db.Aktivitet;
-import no.rosenhoff.common.db.Poll;
-import no.rosenhoff.common.db.PollDAO;
-import no.rosenhoff.common.db.Spiller;
+import no.rosenhoff.common.db.*;
 
 import java.util.*;
 
@@ -22,9 +19,7 @@ public class BarometerBean extends ManagedBeans {
 
     private Aktivitet selectedAktivitet;
 
-    private List<Spiller> aLagSpillere = new ArrayList<Spiller>();
-
-    private List<Spiller> oldboysSpillere = new ArrayList<Spiller>();
+    private List<Person> personer = new ArrayList<Person>();
 
     private List<SpillerPollWrapper> selectedPositivePolls;
 
@@ -32,7 +27,7 @@ public class BarometerBean extends ManagedBeans {
 
     private Set<Integer> spillereInPolls = new HashSet<Integer>();
 
-    private Integer selectedSpillerId;
+    private Integer selectedPersonId;
 
     private SpillerPollWrapper selectedPollLinje;
 
@@ -49,54 +44,32 @@ public class BarometerBean extends ManagedBeans {
         List<Poll> polls = getPollDAO().findByProperty(PollDAO.AKTIVITET_ID, selectedAktivitet.getId());
         selectedPositivePolls = new ArrayList<SpillerPollWrapper>();
         selectedNegativePolls = new ArrayList<SpillerPollWrapper>();
-        spillereInPolls =new HashSet<Integer>();
+        personer = new ArrayList<Person>();
+        spillereInPolls = new HashSet<Integer>();
         for (Poll poll : polls) {
-            Spiller spiller = getSpillerDAO().findById(poll.getSpillerId());
+            Person person = personDAO.findById(poll.getPersonId());
             if (poll.isKommer()) {
-                selectedPositivePolls.add(new SpillerPollWrapper(poll,spiller));
+                selectedPositivePolls.add(new SpillerPollWrapper(poll, person));
             } else {
-                selectedNegativePolls.add(new SpillerPollWrapper(poll,spiller));
+                selectedNegativePolls.add(new SpillerPollWrapper(poll, person));
             }
-            spillereInPolls.add(spiller.getId());
+            spillereInPolls.add(person.getId());
         }
-        Collections.sort(selectedPositivePolls,new SpillerPollWrapperComparator());
+        Collections.sort(selectedPositivePolls, new SpillerPollWrapperComparator());
+        Collections.sort(selectedNegativePolls, new SpillerPollWrapperComparator());
 
-        List<Spiller> spillere = getSpillere(Lag.HOCKEY);
-        aLagSpillere = new ArrayList<Spiller>();
-        Collections.sort(spillere,new SpillerComparator());
-        for (Spiller spiller : spillere) {
-            if (!spillereInPolls.contains(spiller.getId())) {
-                aLagSpillere.add(spiller);
-            }
-        }
-
-        spillere = getSpillere(Lag.OLDBOYS);
-        oldboysSpillere = new ArrayList<Spiller>();
-        Collections.sort(spillere,new SpillerComparator());
-        for (Spiller spiller : spillere) {
-            if (!spillereInPolls.contains(spiller.getId())) {
-                oldboysSpillere.add(spiller);
+        List<Person> allePersoner = jdbcDao.findPersonAktivDenneSesongen(getMenuBean().getSelectedSesong());
+        for (Person person : allePersoner) {
+            if (!spillereInPolls.contains(person.getId())) {
+                personer.add(person);
             }
         }
 
-        selectedSpillerId = 0;        
+
+        selectedPersonId = 0;
         return "barometer";
     }
 
-    private List<Spiller> getSpillere(Lag lag) {
-        Spiller aLagSpiller = new Spiller();
-        aLagSpiller.setLagNavn(lag.name());
-        aLagSpiller.setSesong(getMenuBean().getSelectedSesong().name());
-        return getSpillerDAO().findByExample(aLagSpiller);
-    }
-
-    public List<Spiller> getaLagSpillere() {
-        return aLagSpillere;
-    }
-
-    public List<Spiller> getOldboysSpillere() {
-        return oldboysSpillere;
-    }
 
     public List<SpillerPollWrapper> getSelectedPositivePolls() {
         return selectedPositivePolls;
@@ -107,13 +80,13 @@ public class BarometerBean extends ManagedBeans {
     }
 
     public String addPositive() {
-        if (selectedSpillerId == 0) {
+        if (selectedPersonId == 0) {
             addInfoMessage("Velg en spiller Œ oppdatere");
             return null;
         }
         Poll poll = new Poll();
         poll.setAktivitetId(getSelectedAktivitet().getId());
-        poll.setSpillerId(selectedSpillerId);
+        poll.setPersonId(selectedPersonId);
         poll.setKommer(true);
         getPollDAO().save(poll);
 
@@ -121,31 +94,31 @@ public class BarometerBean extends ManagedBeans {
     }
 
     public String addNegative() {
-        if (selectedSpillerId == 0) {
+        if (selectedPersonId == 0) {
             addInfoMessage("Velg en spiller Œ oppdatere");
             return null;
         }
         Poll poll = new Poll();
         poll.setAktivitetId(getSelectedAktivitet().getId());
-        poll.setSpillerId(selectedSpillerId);
+        poll.setPersonId(selectedPersonId);
         poll.setKommer(false);
         getPollDAO().save(poll);
 
         return lastBarometer();
     }
 
-    public String fjern(){
+    public String fjern() {
         getPollDAO().delete(selectedPollLinje.getPoll());
 
         return lastBarometer();
     }
 
-    public Integer getSelectedSpillerId() {
-        return selectedSpillerId;
+    public Integer getSelectedPersonId() {
+        return selectedPersonId;
     }
 
-    public void setSelectedSpillerId(Integer selectedSpillerId) {
-        this.selectedSpillerId = selectedSpillerId;
+    public void setSelectedPersonId(Integer selectedPersonId) {
+        this.selectedPersonId = selectedPersonId;
     }
 
     public SpillerPollWrapper getSelectedPollLinje() {
@@ -154,5 +127,9 @@ public class BarometerBean extends ManagedBeans {
 
     public void setSelectedPollLinje(SpillerPollWrapper selectedPollLinje) {
         this.selectedPollLinje = selectedPollLinje;
+    }
+
+    public List<Person> getPersoner() {
+        return personer;
     }
 }

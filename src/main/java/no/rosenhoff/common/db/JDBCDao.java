@@ -88,4 +88,26 @@ public class JDBCDao {
         return this.jdbcTemplate.query(personSpillerSql, mapper, lag.name(), sesong.name(), lag.name(), sesong.name(), lag.name(), sesong.name());
     }
 
+    public List<Person> findPersonAktivDenneSesongen(Sesong sesong) {
+        String personSpillerSql = "select p.* " +
+                "from PERSON p, SPILLER s " +
+                "where s.SESONG = ? " +
+                "and p.ID = s.PERSON_ID";
+
+        ParameterizedRowMapper<Person> mapper = new ParameterizedRowMapper<Person>() {
+
+            public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Person person = new Person();
+                person.setId(rs.getInt("id"));
+                person.setNavn(rs.getString("navn"));
+                person.setEmail(rs.getString("email"));
+                person.setMobil(rs.getString("mobil"));
+                person.setImageExtension(rs.getString("IMAGE_EXTENSION"));
+                return person;
+            }
+        };
+        return this.jdbcTemplate.query(personSpillerSql, mapper, sesong.name());
+
+    }
+
 }

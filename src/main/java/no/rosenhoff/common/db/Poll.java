@@ -11,7 +11,7 @@ public class Poll {
     private Integer id;
     private Integer aktivitetId;
     private String label;
-    private Integer spillerId;
+    private Integer personId;
     private boolean kommer;
 
     @GenericGenerator(name = "generator", strategy = "increment")
@@ -35,13 +35,13 @@ public class Poll {
         this.aktivitetId = aktivitetId;
     }
 
-    @Column(name = "SPILLER_ID", nullable = false)
-    public Integer getSpillerId() {
-        return spillerId;
+    @Column(name = "PERSON_ID", nullable = false)
+    public Integer getPersonId() {
+        return personId;
     }
 
-    public void setSpillerId(Integer spillerId) {
-        this.spillerId = spillerId;
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     @Column(name = "LABEL", nullable = false)
