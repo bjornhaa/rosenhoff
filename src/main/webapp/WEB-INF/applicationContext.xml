@@ -126,6 +126,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
     <bean id="reportBean" class="no.rosenhoff.servlet.ReportBean" parent="managedBeans" scope="session"/>
 
+    <bean id="personInfoBean" class="no.rosenhoff.servlet.PersonInfoBean" parent="managedBeans" scope="session"/>
+
     <bean id="nyhetDAO" class="no.rosenhoff.common.db.NyhetDAO">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

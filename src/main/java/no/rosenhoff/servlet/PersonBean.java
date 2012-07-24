@@ -26,7 +26,6 @@ public class PersonBean extends ManagedBeans {
         return personer;
     }
 
-    
 
     public String hent() {
         getMenuBean().setActivePage(ActivePageEnum.SPILLERE);
@@ -42,5 +41,9 @@ public class PersonBean extends ManagedBeans {
             }
         }
         return "spillere";
+    }
+
+    public void loadInfo() {
+        System.out.println("loading ...");
     }
 }

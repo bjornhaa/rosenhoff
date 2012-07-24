@@ -15,7 +15,7 @@ public class AktivitetStedComparator implements Comparator {
     public int compare(Object o, Object o1) {
         AktivitetSted sted1 = (AktivitetSted) o;
         AktivitetSted sted2 = (AktivitetSted) o1;
-        return sted1.getStedsnavn().compareTo(sted2.getStedsnavn());
+        return sted1.getStedsnavn().compareToIgnoreCase(sted2.getStedsnavn());
 
     }
 }

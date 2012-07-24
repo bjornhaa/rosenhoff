@@ -2,6 +2,7 @@ package no.rosenhoff.servlet;
 
 import no.rosenhoff.common.db.ToppScorererElement;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 
 /**
@@ -22,10 +23,16 @@ public class ToppScorerListeComparator implements Comparator<ToppScorererElement
             return -1;
         } else if (o1.getMaal() < o2.getMaal()) {
             return 1;
-        } else if (o1.getPoengPrKamp().intValue() != 0 || o2.getPoengPrKamp().intValue() != 0) {
-            return o1.getPoengPrKamp().compareTo(o2.getPoengPrKamp());
         } else {
-            return o1.getKamper() - o1.getKamper();
+            BigDecimal poengPrKamp1 = o1.getPoengPrKamp();
+            BigDecimal poengPrKamp2 = o2.getPoengPrKamp();
+            if (poengPrKamp1.intValue() != 0 || poengPrKamp2.intValue() != 0) {
+                return poengPrKamp1.compareTo(poengPrKamp2);
+            } else if (o1.getKamper() != o2.getKamper()) {
+                return o2.getKamper() - o1.getKamper();
+            } else {
+                return o1.getPerson().getNavn().compareToIgnoreCase(o2.getPerson().getNavn());
+            }
         }
 
     }

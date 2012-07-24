@@ -1,5 +1,7 @@
 package no.rosenhoff.common.db;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -83,5 +85,11 @@ public class Person {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE);
+        return builder.toString();
     }
 }
