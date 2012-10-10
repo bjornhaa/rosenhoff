@@ -12,7 +12,7 @@ import java.util.Comparator;
 public class SpillerPollWrapperComparator implements Comparator<SpillerPollWrapper> {
 
     public int compare(SpillerPollWrapper spilerPoll1, SpillerPollWrapper spillerPoll2) {
-        return spilerPoll1.getPerson().getNavn().compareToIgnoreCase(spillerPoll2.getPerson().getNavn());
+        return spilerPoll1.getPerson().getId().compareTo(spillerPoll2.getPerson().getId());
 
     }
 }

@@ -89,10 +89,11 @@ public class JDBCDao {
     }
 
     public List<Person> findPersonAktivDenneSesongen(Sesong sesong) {
-        String personSpillerSql = "select p.* " +
+        String personSpillerSql = "select distinct p.* " +
                 "from PERSON p, SPILLER s " +
                 "where s.SESONG = ? " +
-                "and p.ID = s.PERSON_ID";
+                "and p.ID = s.PERSON_ID " +
+                " order by p.navn";
 
         ParameterizedRowMapper<Person> mapper = new ParameterizedRowMapper<Person>() {
 
