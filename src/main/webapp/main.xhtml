@@ -20,7 +20,7 @@
 
             <table style="width:auto;margin:0px;padding:0px">
                 <tr>
-                    <td>Oppmøtebarometer på</td>
+                    <td>Neste aktivitet:</td>
                     <td>#{forsideBean.nesteAktivitet.hva}</td>
                     <td>
                         <t:outputText value="#{forsideBean.nesteAktivitet.naar}">
@@ -31,20 +31,6 @@
                     </td>
                 </tr>
             </table>
-            <table style="width:auto;border:1px black">
-                <tr>
-                    <td>
-                       <img src="image?funksjon=poll&amp;antNegative=#{forsideBean.antNegative}&amp;antPositive=#{forsideBean.antPositive}" alt="graf"/>
-                    </td>
-                    <td style="vertical-align:middle;">
-                        <t:commandButton value="Oppdater" action="#{barometerBean.lastBarometer}">
-                            <f:setPropertyActionListener target="#{barometerBean.selectedAktivitet}" value="#{forsideBean.nesteAktivitet}"/>
-                        </t:commandButton>
-                        status, eller se oppmøte
-                    </td>
-                </tr>
-            </table>
-
 
             <hr/>
             <p/>
