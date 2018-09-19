@@ -11,7 +11,8 @@ public enum Sesong {
     SESONG_2014("2014/2015"),
     SESONG_2015("2015/2016"),
     SESONG_2016("2016/2017"),
-    SESONG_2017("2017/2018");
+    SESONG_2017("2017/2018"),
+    SESONG_2018("2018/2019");
 
     private final String displayText;
 
